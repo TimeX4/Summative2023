@@ -3,7 +3,6 @@ package org.library;
 
 import org.file.*;
 
-import java.time.LocalTime;
 import java.util.List;
 
 public class Book extends Item {
@@ -17,9 +16,10 @@ public class Book extends Item {
     }
 
     private String Author;
+    public static final CSV file = new CSV("/library_files/books.csv");
 
-    public Book(String name, String author, int copies, LocalTime time) {
-        super(name, copies, time);
+    public Book(String name, String author, int copies, int days, String out) {
+        super(name, copies, days, out);
         Author = author;
     }
 
@@ -29,8 +29,8 @@ public class Book extends Item {
         s += Title + ",";
         s += Author + ",";
         s += Copies + ",";
-        s += MaxCheckoutTime + ",";
-        s += CheckOuts;
+        s += MaxCheckoutDays + ",";
+        s += CheckoutsToCSV();
         return s;
     }
 
@@ -45,11 +45,16 @@ public class Book extends Item {
         String name = tokens.get(1);
         String author = tokens.get(2);
         int copies = Integer.parseInt(tokens.get(3));
-        LocalTime time = LocalTime.parse(tokens.get(4));
-        int out = Integer.parseInt(tokens.get(5));
-        return new Book(name, author, copies, time);
+        int time = Integer.parseInt(tokens.get(4));
+        String out = tokens.get(5);
+        return new Book(name, author, copies, time, out);
     }
 
+    /**
+     * Getter for {@link Book#Author}.
+     *
+     * @return {@link Book#Author}.
+     */
     public String getAuthor() {
         return Author;
     }

@@ -57,9 +57,12 @@ public class Interface {
     }
 
     public void RemoveItem(CSV f, long ID) {
-        int idx = f.GetMatchingRow(Item.CSV_INDEX.ID, Long.toString(ID));
-        if (idx == -1) return;
-        f.DeleteLine(idx);
+        try {
+            int idx = f.GetMatchingRow(Item.CSV_INDEX.ID, Long.toString(ID));
+            f.DeleteLine(idx);
+        } catch (Exceptions.RowNotFound e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -71,14 +74,17 @@ public class Interface {
      * @param original The original string.
      */
     public void EditItem(CSV f, long ID, String change, String original) {
-        int idx = f.GetMatchingRow(Item.CSV_INDEX.ID, Long.toString(ID));
-        if (idx == -1) return;
-        String line = f.GetLine(idx);
-        List<String> l = CSV.ParseCSV(line);
-        int in = l.indexOf(original);
-        l.set(in, change);
-        String cs = CSV.ToCSV(l);
-        f.EditLine(idx, cs);
+        try {
+            int idx = f.GetMatchingRow(Item.CSV_INDEX.ID, Long.toString(ID));
+            String line = f.GetLine(idx);
+            List<String> l = CSV.ParseCSV(line);
+            int in = l.indexOf(original);
+            l.set(in, change);
+            String cs = CSV.ToCSV(l);
+            f.EditLine(idx, cs);
+        } catch (Exceptions.RowNotFound e) {
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<Book> FindBooks(CSV f, Item.CSV_INDEX index, String search) {
@@ -100,4 +106,6 @@ public class Interface {
         }
         return found;
     }
+
+    public void CheckOut(Item i, Pateron p) {}
 }

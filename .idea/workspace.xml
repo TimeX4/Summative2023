@@ -4,32 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7e4f20f-0e59-47bd-8691-c5d20d1f4744" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/file/CSV.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/file/File.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/BackButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/Button.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/Frame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/library/Book.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/library/Interface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/library/Item.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/library/Library.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/library/Magazine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/library/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/library/Pateron.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/library_files/books.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/library_files/next_id" afterDir="false" />
+    <list default="true" id="d7e4f20f-0e59-47bd-8691-c5d20d1f4744" name="Changes" comment="Initial Commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/file/Exceptions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/library_files/paterons.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/file/CSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/file/CSV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/file/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/file/File.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Interface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Magazine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Magazine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Pateron.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Pateron.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/books.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/books.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/next_id" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/next_id" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +52,7 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Summative2023" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
+                <item name="application" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -77,8 +66,28 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="74ee190e-e8da-4c2d-b0c4-6ac63c6c39f9" />
+        <option name="url" value="https://github.com/TimeX4/Summative2023.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -101,36 +110,24 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.Summative2023 [check]">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.library.Main" />
-      <module name="Summative2023.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.library.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Summative2023 [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.Summative2023 [run]">
+    <configuration name="Summative2023 [Summative2023]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="assemble" />
+            <option value="Summative2023" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -145,7 +142,7 @@
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -161,12 +158,33 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="Summative2023 [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--stacktrace" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="Summative2023 [spotlessApply]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -182,7 +200,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="Summative2023 [tasks]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Summative2023 [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -193,7 +211,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="tasks" />
+            <option value="test" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -223,20 +241,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.Main" />
       <item itemvalue="Gradle.Summative2023" />
-      <item itemvalue="Gradle.Summative2023 [assemble]" />
+      <item itemvalue="Gradle.Summative2023 [run]" />
+      <item itemvalue="Gradle.Summative2023 [test]" />
+      <item itemvalue="Gradle.Summative2023 [Summative2023]" />
       <item itemvalue="Gradle.Summative2023 [check]" />
-      <item itemvalue="Gradle.Summative2023 [tasks]" />
       <item itemvalue="Gradle.Summative2023 [spotlessApply]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Summative2023 [check]" />
         <item itemvalue="Gradle.Summative2023 [spotlessApply]" />
-        <item itemvalue="Gradle.Summative2023 [assemble]" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Gradle.Summative2023 [tasks]" />
+        <item itemvalue="Gradle.Summative2023 [run]" />
+        <item itemvalue="Gradle.Summative2023 [test]" />
+        <item itemvalue="Gradle.Summative2023 [Summative2023]" />
+        <item itemvalue="Gradle.Summative2023 [check]" />
       </list>
     </recent_temporary>
   </component>
@@ -251,14 +269,52 @@
       <workItem from="1682696859484" duration="457000" />
       <workItem from="1682697331630" duration="85000" />
       <workItem from="1682697458147" duration="55000" />
-      <workItem from="1682697523596" duration="1197000" />
+      <workItem from="1682697523596" duration="4536000" />
+      <workItem from="1682951743767" duration="3112000" />
+      <workItem from="1683037451658" duration="8838000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial Commit">
+      <created>1682699097882</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1682699097882</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Initial Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/library/Item.java</url>
+          <line>77</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Summative2023$Summative2023__test_.ic" NAME="Summative2023 [test] Coverage Results" MODIFIED="1683049983091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Summative2023$Summative2023__run_.ic" NAME="Summative2023 [run] Coverage Results" MODIFIED="1683050060339" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

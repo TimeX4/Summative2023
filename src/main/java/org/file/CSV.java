@@ -1,6 +1,8 @@
 /* (C)2023 */
 package org.file;
 
+import org.library.Item;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,8 +23,17 @@ public class CSV extends File {
         return Arrays.asList(content.split(","));
     }
 
+    /**
+     * Removes the first element of a CSV string (This will generally be the ID). This function is
+     * called internally.
+     *
+     * @param content The CSV string to be trimmed.
+     * @return The trimmed CSV string.
+     */
     public static String RemoveFirstElement(String content) {
-        content = content.substring(content.indexOf(","));
+        int idx = content.indexOf(',');
+        if (idx == -1) return content;
+        content = content.substring(idx);
         return content;
     }
 
@@ -50,7 +61,7 @@ public class CSV extends File {
      */
     public static String Query(String content, Enum idx) {
         int index;
-        for (int i = 0; i < idx.ordinal(); i++) {
+        for (int i = 0; i < idx.ordinal() && i < content.length(); i++) {
             index = content.contains(",") ? content.indexOf(",") : 0;
             content = content.substring(index + 1);
         }
@@ -79,12 +90,16 @@ public class CSV extends File {
     /**
      * Searches the CSV file for a given query and returns the index of the line of the first match.
      *
+     * @throws Exceptions.RowNotFound when the row cannot be found in the file.
      * @param idx The search index (An enumeration).
      * @param content The search query.
      * @return The index of the found item or -1 if not found.
      */
-    public int GetMatchingRow(Enum idx, String content) {
+    public int GetMatchingRow(Enum idx, String content) throws Exceptions.RowNotFound {
         ArrayList<String> s = AsStrings();
+        if (s.size() == 1)
+            throw new Exceptions.RowNotFound(
+                    "Row not found at index " + idx.ordinal() + ". File is empty."); // Empty file
         int i = 1;
         String search;
         do {
@@ -93,7 +108,27 @@ public class CSV extends File {
             if (search.equals(content)) return i;
             i++;
         } while (i < s.size());
-        System.out.println("Row not found.");
-        return -1;
+        throw new Exceptions.RowNotFound("Row not found at index " + idx.ordinal() + ".");
+    }
+
+    /**
+     * Gets a row based on the items ID.
+     *
+     * @param id The items ID.
+     * @return The CSV row of the ID. Or "" if not found.
+     */
+    public String GetFromID(long id) {
+        try {
+            int idx =
+                    GetMatchingRow(
+                            Item.CSV_INDEX.ID,
+                            Long.toString(
+                                    id)); // maybe make CSV_INDEX a param in the future to expand
+            // functionality.
+            return GetLine(idx);
+        } catch (Exceptions.RowNotFound e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

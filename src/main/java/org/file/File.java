@@ -2,6 +2,9 @@
 package org.file;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 public class File {
@@ -59,7 +62,7 @@ public class File {
     public void Write(String content, boolean append) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(writePath, append));
-            if (append) writer.newLine();
+            if (append && Files.size(Path.of(writePath)) != 0) writer.newLine();
             writer.write(content);
             writer.close();
         } catch (Exception e) {
@@ -127,6 +130,17 @@ public class File {
         }
     }
 
+    public void EmptyContents() {
+        try {
+            BufferedWriter writer =
+                    Files.newBufferedWriter(
+                            Path.of(writePath), StandardOpenOption.TRUNCATE_EXISTING);
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Gets a line of the file given the index.
      *
@@ -139,8 +153,11 @@ public class File {
         String line = "";
         int i = 0;
         try {
-            while ((line = file.readLine()) != null) {
-                if (i == idx) break;
+            while (file.readLine() != null) {
+                if (i == idx) {
+                    line = file.readLine();
+                    break;
+                }
                 i++;
             }
             inp.close();
