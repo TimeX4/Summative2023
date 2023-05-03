@@ -48,14 +48,17 @@ public abstract class Item {
      * @return An array of Paterons who have checked out the given item.
      */
     private ArrayList<Pateron> ParseCheckouts(String out) {
-        if (out.equals("") || out.equals("{}")) return new ArrayList<>();
-        out = out.substring(1, out.length() - 1);
-        String[] s = out.split(":");
+        if (out.equals("") || out.equals("{}"))
+            return new ArrayList<>(); // Checkouts list is empty.
+        out = out.substring(1, out.length() - 1); // Remove the encapsulating {}.
+        String[] s = out.split(":"); // Split the list into its values.
         ArrayList<Pateron> l = new ArrayList<>();
         for (int i = 0; i < s.length; i++) {
             long id = Long.parseLong(s[i]);
             try {
-                String item = Pateron.file.GetFromID(id);
+                String item =
+                        Pateron.file.GetFromID(
+                                id); // Get the matching Pateron if one exists with the provided id.
                 if (item.equals("")) continue;
                 l.add(Pateron.FromCSV(item));
             } catch (Exception e) {
@@ -71,15 +74,14 @@ public abstract class Item {
      * @return A CSV string of Pateron ids.
      */
     public String CheckoutsToCSV() {
-        if (CheckOuts.size() == 0) return "{}";
+        if (CheckOuts.size() == 0) return "{}"; // Checkouts list is empty.
         StringBuilder str = new StringBuilder();
-        str.append("{");
+        str.append("{"); // Add our opening bracket.
         for (Pateron s : CheckOuts) {
-            str.append(s.getID());
-            str.append(":");
+            str.append(s.getID()).append(":"); // Add the id and a :
         }
-        str.deleteCharAt(str.length());
-        str.append("}");
+        str.deleteCharAt(str.length()); // Remove the trailing :
+        str.append("}"); // At the closing bracket.
         System.out.println(str);
         return str.toString();
     }

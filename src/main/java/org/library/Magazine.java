@@ -3,13 +3,12 @@ package org.library;
 
 import org.file.CSV;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class Magazine extends Item {
-    private LocalDate RenewalDate;
+    private int RenewalDate;
 
-    Magazine(String name, int copies, int days, String out, LocalDate renew) {
+    Magazine(String name, int copies, int days, String out, int renew) {
         super(name, copies, days, out);
         RenewalDate = renew;
     }
@@ -21,7 +20,7 @@ public class Magazine extends Item {
         s += Copies + ",";
         s += MaxCheckoutDays + ",";
         s += CheckOuts + ",";
-        s += RenewalDate.toString();
+        s += RenewalDate;
         return s;
     }
 
@@ -37,7 +36,16 @@ public class Magazine extends Item {
         int copies = Integer.parseInt(tokens.get(2));
         int days = Integer.parseInt(tokens.get(3));
         String out = tokens.get(4);
-        LocalDate renew = LocalDate.parse(tokens.get(5));
+        int renew = Integer.parseInt(tokens.get(5));
         return new Magazine(name, copies, days, out, renew);
+    }
+
+    /**
+     * Getter for {@link Magazine#RenewalDate}.
+     *
+     * @return {@link Magazine#RenewalDate}.
+     */
+    public int getRenewalDate() {
+        return RenewalDate;
     }
 }

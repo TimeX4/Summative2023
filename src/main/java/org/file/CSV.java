@@ -31,9 +31,9 @@ public class CSV extends File {
      * @return The trimmed CSV string.
      */
     public static String RemoveFirstElement(String content) {
-        int idx = content.indexOf(',');
+        int idx = content.indexOf(','); // find the first ,
         if (idx == -1) return content;
-        content = content.substring(idx);
+        content = content.substring(idx); // substring from that comma forwards
         return content;
     }
 
@@ -46,9 +46,11 @@ public class CSV extends File {
     public static String ToCSV(List<String> l) {
         StringBuilder str = new StringBuilder();
         for (String s : l) {
-            str.append(s).append(",");
+            str.append(s).append(","); // append each element of the list as well as a comma
         }
-        str = new StringBuilder(str.substring(0, str.length() - 1));
+        str =
+                new StringBuilder(
+                        str.substring(0, str.length() - 1)); // delete the final "hanging" comma
         return str.toString();
     }
 
@@ -62,11 +64,18 @@ public class CSV extends File {
     public static String Query(String content, Enum idx) {
         int index;
         for (int i = 0; i < idx.ordinal() && i < content.length(); i++) {
-            index = content.contains(",") ? content.indexOf(",") : 0;
-            content = content.substring(index + 1);
+            index =
+                    content.contains(",")
+                            ? content.indexOf(",")
+                            : 0; // find the next comma if it exists
+            content = content.substring(index + 1); // set the string to be from that comma forwards
         }
         index = content.contains(",") ? content.indexOf(",") : 0;
-        content = content.substring(0, index);
+        content =
+                content.substring(
+                        0,
+                        index); // delete the remainder of the string, so we are left with just our
+        // query
         return content;
     }
 
@@ -79,6 +88,7 @@ public class CSV extends File {
      */
     public ArrayList<String> FindItems(Enum idx, String query) {
         ArrayList<String> found = new ArrayList<>();
+        // Iterate over the entire file and query each row for what we are searching for.
         for (String s : AsStrings()) {
             if (query.equals(CSV.Query(s, idx))) {
                 found.add(s);
@@ -97,18 +107,20 @@ public class CSV extends File {
      */
     public int GetMatchingRow(Enum idx, String content) throws Exceptions.RowNotFound {
         ArrayList<String> s = AsStrings();
-        if (s.size() == 1)
+        if (s.size() == 1 || s.size() == 0)
             throw new Exceptions.RowNotFound(
                     "Row not found at index " + idx.ordinal() + ". File is empty."); // Empty file
-        int i = 1;
+        int i = 1; // Set i to 1 because the first line of a CSV file is the template
         String search;
         do {
             String line = s.get(i);
             search = Query(line, idx);
-            if (search.equals(content)) return i;
+            if (search.equals(content))
+                return i; // return the index of the row we have found our content on
             i++;
         } while (i < s.size());
-        throw new Exceptions.RowNotFound("Row not found at index " + idx.ordinal() + ".");
+        return -1;
+        // throw new Exceptions.RowNotFound("Row not found at index " + idx.ordinal() + ".");
     }
 
     /**
@@ -125,6 +137,7 @@ public class CSV extends File {
                             Long.toString(
                                     id)); // maybe make CSV_INDEX a param in the future to expand
             // functionality.
+            if (idx == -1) return ""; // Item has not been found.
             return GetLine(idx);
         } catch (Exceptions.RowNotFound e) {
             e.printStackTrace();

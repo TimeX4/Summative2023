@@ -42,6 +42,7 @@ public class File {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inp));
         String l;
         try {
+            // Iterate over the file and add each line to an ArrayList of strings.
             while ((l = reader.readLine()) != null) {
                 content.add(l);
             }
@@ -62,7 +63,8 @@ public class File {
     public void Write(String content, boolean append) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(writePath, append));
-            if (append && Files.size(Path.of(writePath)) != 0) writer.newLine();
+            if (append && Files.size(Path.of(writePath)) != 0)
+                writer.newLine(); // If we are appending we need a new line.
             writer.write(content);
             writer.close();
         } catch (Exception e) {
@@ -83,9 +85,11 @@ public class File {
         String line;
         int i = 0;
         try {
+            // Loop over the file and add each line back to an inputBuffer BUT modify the one we
+            // want.
             while ((line = file.readLine()) != null) {
                 if (i == idx) {
-                    line = newLine;
+                    line = newLine; // Make the changes we want on the line we want.
                 }
                 inputBuffer.append(line);
                 inputBuffer.append('\n');
@@ -111,6 +115,8 @@ public class File {
         String line;
         int i = 0;
         try {
+            // Loop over the file and add each line back to an inputBuffer BUT skip the one we want
+            // to delete.
             while ((line = file.readLine()) != null) {
                 if (i == idx) {
                     i++;
@@ -134,8 +140,11 @@ public class File {
         try {
             BufferedWriter writer =
                     Files.newBufferedWriter(
-                            Path.of(writePath), StandardOpenOption.TRUNCATE_EXISTING);
-            writer.close();
+                            Path.of(writePath),
+                            StandardOpenOption
+                                    .TRUNCATE_EXISTING); // Open the file with the TRUNCATE_EXISTING
+            // flag emptying its content
+            writer.close(); // close the file afterwards.
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -153,6 +162,8 @@ public class File {
         String line = "";
         int i = 0;
         try {
+            // iterate over the file until we hit the line we want, store it and break (not return
+            // to close handles)
             while (file.readLine() != null) {
                 if (i == idx) {
                     line = file.readLine();

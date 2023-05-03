@@ -89,16 +89,19 @@ public class Pateron {
      */
     public float CheckIn(Item b) {
         if (!CheckedOut.containsKey(b.getID())) return 0.0f; // not checked out
-        LocalDate now = LocalDate.now();
-        LocalDate then = CheckedOut.get(b.getID());
-        LocalDate max = then.plus(b.MaxCheckoutDays, ChronoUnit.DAYS);
+        LocalDate now = LocalDate.now(); // Get the current time.
+        LocalDate then = CheckedOut.get(b.getID()); // Get the time when the item was checked out.
+        LocalDate max =
+                then.plus(
+                        b.MaxCheckoutDays,
+                        ChronoUnit.DAYS); // Calculate the max date that the book can be out for.
+        b.Copies++; // Add the stock back
+        CheckedOut.remove(b.ID); // Remove the book from the users checked out list.
         if (max.isAfter(now)) {
-            b.Copies++;
-            CheckedOut.remove(b.ID);
-            return 0.0f;
+            return 0.0f; // No fee the book was on time
         } else {
             Period p = max.until(now);
-            return p.getDays() * 5.0f;
+            return p.getDays() * 5.0f; // days overdue * 5 is the fee for being late 😈
         }
     }
 
@@ -154,15 +157,15 @@ public class Pateron {
      * @return A hashmap filled with the parsed date HashMap<long, LocalDate>
      */
     public HashMap<Long, LocalDate> ParseCheckedOut(String out) {
-        if (out.equals("") || out.equals("{}")) return new HashMap<>();
+        if (out.equals("") || out.equals("{}")) return new HashMap<>(); // The list is empty.
         HashMap<Long, LocalDate> hash = new HashMap<>();
-        out = out.substring(1, out.length() - 1);
-        String[] keys = out.split("\\|");
+        out = out.substring(1, out.length() - 1); // Remove the {}
+        String[] keys = out.split("\\|"); // Split at each | which are the keys id:date
         for (String k : keys) {
-            String[] v = k.split(":");
+            String[] v = k.split(":"); // split this into its components
             long id = Long.parseLong(v[0]); // id
             LocalDate d = LocalDate.parse(v[1]); // date
-            hash.put(id, d);
+            hash.put(id, d); // put them in the hashmap
         }
         return hash;
     }
@@ -174,5 +177,24 @@ public class Pateron {
      */
     public String getName() {
         return Name;
+    }
+
+    /**
+     * Getter for {@link Pateron#CheckedOut}.
+     *
+     * @return {@link Pateron#CheckedOut}.
+     */
+    public HashMap<Long, LocalDate> getCheckedOut() {
+        return CheckedOut;
+    }
+
+    /**
+     * Sets the value of {@link Pateron#CheckedOut} at a given key.
+     *
+     * @param key The key to modify (or insert).
+     * @param value The value to be stored at that key.
+     */
+    public void setCheckedOut(long key, LocalDate value) {
+        CheckedOut.put(key, value);
     }
 }
