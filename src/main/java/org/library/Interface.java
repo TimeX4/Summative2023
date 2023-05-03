@@ -65,6 +65,17 @@ public class Interface {
         }
     }
 
+    public void AddPateron(CSV f, Pateron p) {
+        String csv = p.ToCSV();
+        csv = CSV.RemoveFirstElement(csv);
+        ArrayList<String> found = f.FindItems(Pateron.CSV_INDEX.NAME, p.getName());
+        for (String s : found) {
+            s = CSV.RemoveFirstElement(s);
+            if (s.equals(csv)) return;
+        }
+        f.Write(p.ToCSV(), true);
+    }
+
     /**
      * Edits a property of an item directly in the CSV file. Searched based by Item ID.
      *

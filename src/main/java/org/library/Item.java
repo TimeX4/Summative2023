@@ -48,7 +48,7 @@ public abstract class Item {
      * @return An array of Paterons who have checked out the given item.
      */
     private ArrayList<Pateron> ParseCheckouts(String out) {
-        if (out.equals("")) return new ArrayList<>();
+        if (out.equals("") || out.equals("{}")) return new ArrayList<>();
         out = out.substring(1, out.length() - 1);
         String[] s = out.split(":");
         ArrayList<Pateron> l = new ArrayList<>();

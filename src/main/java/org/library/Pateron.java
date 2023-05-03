@@ -21,12 +21,20 @@ public class Pateron {
     private HashMap<Long, LocalDate> CheckedOut;
     private float DueFees;
 
+    public enum CSV_INDEX {
+        ID,
+        NAME,
+        PHONE_NUMBER,
+        FEES,
+        CHECKOUTS
+    }
+
     Pateron(String name, String number, float fees, String out) {
         Name = name;
         PhoneNumber = number;
         DueFees = fees;
-        CheckedOut = new HashMap<>();
-        // out = ParseCheckedOut(out);
+        // CheckedOut = new HashMap<>();
+        CheckedOut = ParseCheckedOut(out);
 
         ID = NEXT_ID++;
     }
@@ -118,9 +126,9 @@ public class Pateron {
     }
 
     /**
-     * Converts a paterons checked out list to CSV. {}
+     * Converts a paterons checked out list to CSV of the format {id:date|id:date}
      *
-     * @return
+     * @return CSV of the Pateron object.
      */
     public String CheckoutToCSV() {
         if (CheckedOut.size() == 0) return "{}";
@@ -138,9 +146,33 @@ public class Pateron {
         return str.toString();
     }
 
+    /**
+     * Parses a CSV string into a hashmap containing keys of pateron ids and values of checkout
+     * dates.
+     *
+     * @param out The CSV to be parsed.
+     * @return A hashmap filled with the parsed date HashMap<long, LocalDate>
+     */
     public HashMap<Long, LocalDate> ParseCheckedOut(String out) {
+        if (out.equals("") || out.equals("{}")) return new HashMap<>();
         HashMap<Long, LocalDate> hash = new HashMap<>();
-
+        out = out.substring(1, out.length() - 1);
+        String[] keys = out.split("\\|");
+        for (String k : keys) {
+            String[] v = k.split(":");
+            long id = Long.parseLong(v[0]); // id
+            LocalDate d = LocalDate.parse(v[1]); // date
+            hash.put(id, d);
+        }
         return hash;
+    }
+
+    /**
+     * Getter for {@link Pateron#Name}.
+     *
+     * @return {@link Pateron#Name}.
+     */
+    public String getName() {
+        return Name;
     }
 }

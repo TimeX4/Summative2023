@@ -21,7 +21,7 @@ public class Magazine extends Item {
         s += Copies + ",";
         s += MaxCheckoutDays + ",";
         s += CheckOuts + ",";
-        s += RenewalDate;
+        s += RenewalDate.toString();
         return s;
     }
 
