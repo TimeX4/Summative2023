@@ -1,9 +1,6 @@
 /* (C)2023 */
 package org.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
 public class LibraryGUI {
@@ -13,17 +10,23 @@ public class LibraryGUI {
     private JTextField usernameTextField;
     private JPasswordField passwordPasswordField;
 
-    public LibraryGUI() {
+    public LibraryGUI(JFrame frame) {
         loginButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {}
+                actionEvent -> {
+                    frame.setContentPane(PateronPage.getPanel());
+                    frame.validate();
+                    frame.repaint();
                 });
     }
 
     public static void draw() {
         JFrame frame = new JFrame("LibraryGUI");
-        frame.setContentPane(new LibraryGUI().Library);
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        frame.setContentPane(new LibraryGUI(frame).Library);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(200, 500);
         frame.pack();

@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7e4f20f-0e59-47bd-8691-c5d20d1f4744" name="Changes" comment="Initial Commit">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/Library.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/LibraryGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/BackButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/Button.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/Frame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/books.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/books.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/next_id" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/next_id" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/paterons.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/paterons.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/Library.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/Library.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/LibraryGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/LibraryGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,8 +96,6 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "450",
     "WebServerToolWindowFactoryState": "false",
     "deletionFromPopupRequiresConfirmation": "false",
     "node.js.detected.package.eslint": "true",
@@ -112,7 +103,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -200,7 +191,6 @@
       <workItem from="1682951743767" duration="3112000" />
       <workItem from="1683037451658" duration="8838000" />
       <workItem from="1683066771771" duration="5252000" />
-      <workItem from="1683211861745" duration="6582000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1682699097882</created>
@@ -233,6 +223,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Summative2023$Summative2023__test_.ic" NAME="Summative2023 [test] Coverage Results" MODIFIED="1683049983091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Summative2023$Summative2023__run_.ic" NAME="Summative2023 [run] Coverage Results" MODIFIED="1683220103006" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Summative2023$Summative2023__run_.ic" NAME="Summative2023 [run] Coverage Results" MODIFIED="1683050060339" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
