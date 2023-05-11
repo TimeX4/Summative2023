@@ -34,6 +34,18 @@ public abstract class Item {
         ID = NEXT_ID++;
     }
 
+    Item(long id, String name, int copies, int days, String out) {
+        Title = name;
+        Copies = copies;
+        MaxCheckoutDays = days;
+        CheckOuts = ParseCheckouts(out);
+
+        ID = id;
+    }
+
+    // TODO: Load from file on startup with proper ids, here and paterons.
+    // TODO: Write to file on cleanup, here and paterons.
+
     /**
      * Converts an Item object to a CSV string.
      *
@@ -125,5 +137,14 @@ public abstract class Item {
      */
     public int getCopies() {
         return Copies;
+    }
+
+    /**
+     * Getter for {@link Item#MaxCheckoutDays}.
+     *
+     * @return {@link Item#MaxCheckoutDays}.
+     */
+    public int getMaxCheckoutDays() {
+        return MaxCheckoutDays;
     }
 }

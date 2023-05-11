@@ -9,6 +9,9 @@ import java.util.List;
 
 public class CSV extends File {
 
+    private ArrayList<String> strings = AsStrings();
+
+    // TODO: Ensure things are only loaded once.
     public CSV(String path) {
         super(path);
     }
@@ -70,7 +73,7 @@ public class CSV extends File {
                             : 0; // find the next comma if it exists
             content = content.substring(index + 1); // set the string to be from that comma forwards
         }
-        index = content.contains(",") ? content.indexOf(",") : 0;
+        index = content.contains(",") ? content.indexOf(",") : content.length();
         content =
                 content.substring(
                         0,
@@ -89,7 +92,7 @@ public class CSV extends File {
     public ArrayList<String> FindItems(Enum idx, String query) {
         ArrayList<String> found = new ArrayList<>();
         // Iterate over the entire file and query each row for what we are searching for.
-        for (String s : AsStrings()) {
+        for (String s : strings) {
             if (query.equals(CSV.Query(s, idx))) {
                 found.add(s);
             }
@@ -106,7 +109,7 @@ public class CSV extends File {
      * @return The index of the found item or -1 if not found.
      */
     public int GetMatchingRow(Enum idx, String content) throws Exceptions.RowNotFound {
-        ArrayList<String> s = AsStrings();
+        ArrayList<String> s = strings;
         if (s.size() == 1 || s.size() == 0)
             throw new Exceptions.RowNotFound(
                     "Row not found at index " + idx.ordinal() + ". File is empty."); // Empty file
@@ -143,5 +146,15 @@ public class CSV extends File {
             e.printStackTrace();
             return "";
         }
+    }
+
+    /**
+     * Gets the contents of the CSV file as a list of strings. This list is loaded once at object
+     * creation and cached. To convert a file to a list of strings see {@link File#AsStrings()}.
+     *
+     * @return An ArrayList of Strings.
+     */
+    public ArrayList<String> getStrings() {
+        return strings;
     }
 }

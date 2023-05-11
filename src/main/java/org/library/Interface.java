@@ -144,9 +144,9 @@ public class Interface {
      */
     public ArrayList<Book> FindBooks(CSV f, Item.CSV_INDEX index, String search) {
         ArrayList<Book> found = new ArrayList<>();
-        for (String s : f.AsStrings()) {
+        for (String s : f.getStrings()) {
             if (CSV.Query(s, index).equals(search)) {
-                found.add(Book.FromCSV(s));
+                // found.add(Book.FromCSV(s));
             }
         }
         return found;
@@ -162,7 +162,7 @@ public class Interface {
      */
     public ArrayList<Magazine> FindMagazines(CSV f, Item.CSV_INDEX index, String search) {
         ArrayList<Magazine> found = new ArrayList<>();
-        for (String s : f.AsStrings()) {
+        for (String s : f.getStrings()) {
             if (CSV.Query(s, index).equals(search)) {
                 found.add(Magazine.FromCSV(s));
             }

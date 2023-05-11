@@ -36,7 +36,7 @@ public class File {
      *
      * @return An ArrayList of Strings containing each line.
      */
-    public ArrayList<String> AsStrings() {
+    protected ArrayList<String> AsStrings() {
         ArrayList<String> content = new ArrayList<>();
         InputStream inp = OpenFile();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inp));
@@ -164,9 +164,11 @@ public class File {
         try {
             // iterate over the file until we hit the line we want, store it and break (not return
             // to close handles)
-            while (file.readLine() != null) {
+            while ((line = file.readLine())
+                    != null) { // if item is not found will return the last line, need some way to
+                // validate this but lazy
+                // TODO: FIX THIS ^
                 if (i == idx) {
-                    line = file.readLine();
                     break;
                 }
                 i++;

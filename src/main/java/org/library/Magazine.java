@@ -13,6 +13,11 @@ public class Magazine extends Item {
         RenewalDate = renew;
     }
 
+    Magazine(long id, String name, int copies, int days, String out, int renew) {
+        super(id, name, copies, days, out);
+        RenewalDate = renew;
+    }
+
     public String ToCSV() {
         String s = "";
         s += ID + ",";

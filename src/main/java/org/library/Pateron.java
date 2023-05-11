@@ -20,21 +20,23 @@ public class Pateron {
     private final long ID;
     private HashMap<Long, LocalDate> CheckedOut;
     private float DueFees;
+    private String Password;
 
     public enum CSV_INDEX {
         ID,
         NAME,
         PHONE_NUMBER,
         FEES,
-        CHECKOUTS
+        CHECKOUTS,
+        PASSWORD
     }
 
-    Pateron(String name, String number, float fees, String out) {
+    Pateron(String name, String number, float fees, String out, String pword) {
         Name = name;
         PhoneNumber = number;
         DueFees = fees;
-        // CheckedOut = new HashMap<>();
         CheckedOut = ParseCheckedOut(out);
+        Password = pword;
 
         ID = NEXT_ID++;
     }
@@ -50,7 +52,8 @@ public class Pateron {
         s += Name + ",";
         s += PhoneNumber + ",";
         s += DueFees + ",";
-        s += CheckoutToCSV();
+        s += CheckoutToCSV() + ",";
+        s += Password;
         return s;
     }
 
@@ -66,7 +69,8 @@ public class Pateron {
         String number = tokens.get(2);
         float fees = Float.parseFloat(tokens.get(3));
         String out = tokens.get(4);
-        return new Pateron(name, number, fees, out);
+        String pword = tokens.get(5);
+        return new Pateron(name, number, fees, out, pword);
     }
 
     /**
@@ -97,6 +101,7 @@ public class Pateron {
                         ChronoUnit.DAYS); // Calculate the max date that the book can be out for.
         b.Copies++; // Add the stock back
         CheckedOut.remove(b.ID); // Remove the book from the users checked out list.
+        // TODO: Write changes to the file.
         if (max.isAfter(now)) {
             return 0.0f; // No fee the book was on time
         } else {

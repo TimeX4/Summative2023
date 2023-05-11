@@ -5,11 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7e4f20f-0e59-47bd-8691-c5d20d1f4744" name="Changes" comment="Initial Commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllBooks.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllBooks.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/file/CSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/file/CSV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/file/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/file/File.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/Library.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/Library.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/LibraryGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/LibraryGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Interface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Magazine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Magazine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Pateron.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Pateron.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/paterons.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/paterons.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,22 +101,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "deletionFromPopupRequiresConfirmation": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;450&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Gradle.Summative2023 [spotlessApply]">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.library.Main" />
@@ -191,6 +203,10 @@
       <workItem from="1682951743767" duration="3112000" />
       <workItem from="1683037451658" duration="8838000" />
       <workItem from="1683066771771" duration="5252000" />
+      <workItem from="1683211861745" duration="6582000" />
+      <workItem from="1683642404135" duration="4296000" />
+      <workItem from="1683728574764" duration="4572000" />
+      <workItem from="1683815275153" duration="5193000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1682699097882</created>
@@ -221,8 +237,21 @@
     <MESSAGE value="Initial Commit" />
     <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.util.ConcurrentModificationException" package="java.util" />
+          <option name="timeStamp" value="11" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Summative2023$Main.ic" NAME="Main Coverage Results" MODIFIED="1683729009380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.library.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/Summative2023$Summative2023__test_.ic" NAME="Summative2023 [test] Coverage Results" MODIFIED="1683049983091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Summative2023$Summative2023__run_.ic" NAME="Summative2023 [run] Coverage Results" MODIFIED="1683050060339" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Summative2023$Summative2023__run_.ic" NAME="Summative2023 [run] Coverage Results" MODIFIED="1683220103006" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
