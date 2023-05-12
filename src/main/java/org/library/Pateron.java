@@ -15,6 +15,8 @@ public class Pateron {
     private static long NEXT_ID = GetNextID();
     // private static long NEXT_ID = 0;
     public static final CSV file = new CSV("/library_files/paterons.csv");
+    private static HashMap<Long, Pateron> loadedPaterons = LoadPaterons();
+
     private String Name;
     private String PhoneNumber;
     private final long ID;
@@ -41,6 +43,16 @@ public class Pateron {
         ID = NEXT_ID++;
     }
 
+    Pateron(long id, String name, String number, float fees, String out, String pword) {
+        Name = name;
+        PhoneNumber = number;
+        DueFees = fees;
+        CheckedOut = ParseCheckedOut(out);
+        Password = pword;
+
+        ID = id;
+    }
+
     /**
      * Converts a Pateron to a CSV string.
      *
@@ -64,13 +76,15 @@ public class Pateron {
      * @return A new Pateron object.
      */
     public static Pateron FromCSV(String csv) {
+        if (csv.equals("")) return null;
         List<String> tokens = CSV.ParseCSV(csv);
+        long id = Long.parseLong(tokens.get(0));
         String name = tokens.get(1);
         String number = tokens.get(2);
         float fees = Float.parseFloat(tokens.get(3));
         String out = tokens.get(4);
         String pword = tokens.get(5);
-        return new Pateron(name, number, fees, out, pword);
+        return new Pateron(id, name, number, fees, out, pword);
     }
 
     /**
@@ -79,8 +93,10 @@ public class Pateron {
      * @param b The item to add.
      */
     public void CheckOut(Item b) {
+        if (b.getCopies() <= 0) return; // TODO: Unable to checkout.
         LocalDate date = LocalDate.now();
         CheckedOut.put(b.getID(), date);
+        b.decrementCopies();
     }
 
     /**
@@ -175,6 +191,18 @@ public class Pateron {
         return hash;
     }
 
+    private static HashMap<Long, Pateron> LoadPaterons() {
+        HashMap<Long, Pateron> loaded = new HashMap<>();
+        int i = 0;
+        for (String s : Pateron.file.getStrings()) {
+            if (i++ == 0) continue;
+            Pateron b = FromCSV(s);
+            if (b == null) continue;
+            loaded.put(b.getID(), b);
+        }
+        return loaded;
+    }
+
     /**
      * Getter for {@link Pateron#Name}.
      *
@@ -201,5 +229,17 @@ public class Pateron {
      */
     public void setCheckedOut(long key, LocalDate value) {
         CheckedOut.put(key, value);
+    }
+
+    public static HashMap<Long, Pateron> getLoadedPaterons() {
+        return loadedPaterons;
+    }
+
+    public static void setLoadedPaterons(HashMap<Long, Pateron> loadedPaterons) {
+        Pateron.loadedPaterons = loadedPaterons;
+    }
+
+    public String getPassword() {
+        return Password;
     }
 }

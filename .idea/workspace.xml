@@ -5,21 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7e4f20f-0e59-47bd-8691-c5d20d1f4744" name="Changes" comment="Initial Commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllBooks.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllBooks.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/file/CSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/file/CSV.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/file/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/file/File.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/Library.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/Library.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/AllBooks.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllBooks.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/AllBooks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllBooks.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/LibraryGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/LibraryGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Interface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Magazine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Magazine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Pateron.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Pateron.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/paterons.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/paterons.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,6 +200,7 @@
       <workItem from="1683642404135" duration="4296000" />
       <workItem from="1683728574764" duration="4572000" />
       <workItem from="1683815275153" duration="5193000" />
+      <workItem from="1683905537244" duration="4174000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1682699097882</created>

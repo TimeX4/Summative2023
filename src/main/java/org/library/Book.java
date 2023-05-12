@@ -60,8 +60,10 @@ public class Book extends Item {
     }
 
     private static HashMap<Long, Book> LoadBooks() {
+        int i = 0;
         HashMap<Long, Book> loaded = new HashMap<>();
         for (String s : Book.file.getStrings()) {
+            if (i++ == 0) continue;
             Book b = FromCSV(s);
             if (b == null) continue;
             loaded.put(b.getID(), b);

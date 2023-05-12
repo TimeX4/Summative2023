@@ -139,6 +139,11 @@ public abstract class Item {
         return Copies;
     }
 
+    /** Decrements copies by 1. */
+    public void decrementCopies() {
+        Copies--;
+    }
+
     /**
      * Getter for {@link Item#MaxCheckoutDays}.
      *

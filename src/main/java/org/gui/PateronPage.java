@@ -43,7 +43,13 @@ public class PateronPage {
                     frame.validate();
                     frame.repaint();
                 });
-        ViewAll.addActionListener(actionEvent -> {});
+        ViewAll.addActionListener(
+                actionEvent -> {
+                    AllBooks allBooks = new AllBooks(p, this, frame);
+                    frame.setContentPane(allBooks.getPanel());
+                    frame.validate();
+                    frame.repaint();
+                });
 
         CheckIn.addActionListener(
                 actionEvent -> {
@@ -60,6 +66,7 @@ public class PateronPage {
                             Books.revalidate();
                             Books.repaint();
                         }
+                        i++;
                     }
                 });
     }

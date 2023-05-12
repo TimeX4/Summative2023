@@ -1,7 +1,6 @@
 /* (C)2023 */
 package org.gui;
 
-import org.file.CSV;
 import org.library.Pateron;
 
 import javax.swing.*;
@@ -18,13 +17,9 @@ public class LibraryGUI {
                 actionEvent -> {
                     String user = usernameTextField.getText(); // TODO: -1 For Librarian
                     String pword = String.valueOf(passwordPasswordField.getPassword());
-                    String pateron = "";
-                    try {
-                        pateron = Pateron.file.GetFromID(Long.parseLong(user));
-                    } catch (NumberFormatException ignored) {
-                    }
-                    if (CSV.Query(pateron, Pateron.CSV_INDEX.PASSWORD).equals(pword)) {
-                        PateronPage page = new PateronPage(Pateron.FromCSV(pateron), frame, this);
+                    Pateron pateron = Pateron.getLoadedPaterons().get(Long.parseLong(user));
+                    if (pateron.getPassword().equals(pword)) {
+                        PateronPage page = new PateronPage(pateron, frame, this);
                         frame.setContentPane(page.getPanel());
                         frame.validate();
                         frame.repaint();
