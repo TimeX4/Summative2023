@@ -75,7 +75,7 @@ public class Interface {
      * @param f The file to remove from.
      * @param ID The items ID.
      */
-    public void RemoveItem(CSV f, long ID) {
+    public static void RemoveItem(CSV f, long ID) {
         try {
             int idx =
                     f.GetMatchingRow(

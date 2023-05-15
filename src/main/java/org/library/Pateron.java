@@ -53,6 +53,10 @@ public class Pateron {
         ID = id;
     }
 
+    public static void DeletePateron(long id) {
+        loadedPaterons.remove(id);
+    }
+
     /**
      * Converts a Pateron to a CSV string.
      *
@@ -126,24 +130,6 @@ public class Pateron {
         }
     }
 
-    /**
-     * Getter for {@link Pateron#ID}.
-     *
-     * @return {@link Pateron#ID}.
-     */
-    public long getID() {
-        return ID;
-    }
-    /**
-     * Gets the stored NEXT_ID. TO BE CALLED ONCE AT PROGRAM STARTUP. SEE {@link Pateron#NEXT_ID}.
-     *
-     * @return NEXT_ID as a long.
-     */
-    public static long GetNextID() {
-        File f = new File("/library_files/next_id");
-        return Long.parseLong(f.GetLine(0));
-    }
-
     /** Stores NEXT_ID. TO BE CALLED ONCE AT PROGRAM CLEANUP. */
     public static void WriteNextID(File f) {
         f.Write(Long.toString(NEXT_ID), true);
@@ -168,6 +154,10 @@ public class Pateron {
         str.deleteCharAt(str.length() - 1);
         str.append("}");
         return str.toString();
+    }
+
+    public String toString() {
+        return ID + ", " + Name + ", " + PhoneNumber;
     }
 
     /**
@@ -201,6 +191,24 @@ public class Pateron {
             loaded.put(b.getID(), b);
         }
         return loaded;
+    }
+
+    /**
+     * Getter for {@link Pateron#ID}.
+     *
+     * @return {@link Pateron#ID}.
+     */
+    public long getID() {
+        return ID;
+    }
+    /**
+     * Gets the stored NEXT_ID. TO BE CALLED ONCE AT PROGRAM STARTUP. SEE {@link Pateron#NEXT_ID}.
+     *
+     * @return NEXT_ID as a long.
+     */
+    public static long GetNextID() {
+        File f = new File("/library_files/next_id");
+        return Long.parseLong(f.GetLine(0));
     }
 
     /**
@@ -241,5 +249,25 @@ public class Pateron {
 
     public String getPassword() {
         return Password;
+    }
+
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+    public float getDueFees() {
+        return DueFees;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        PhoneNumber = phoneNumber;
+    }
+
+    public void setDueFees(float dueFees) {
+        DueFees = dueFees;
     }
 }

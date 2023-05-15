@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7e4f20f-0e59-47bd-8691-c5d20d1f4744" name="Changes" comment="Initial Commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllPaterons.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllPaterons.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/EditPateron.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/EditPateron.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/LibrarianPanel.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/LibrarianPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/AllBooks.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllBooks.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/AllBooks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllBooks.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/LibraryGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/LibraryGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Interface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Pateron.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Pateron.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -112,7 +114,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Gradle.Summative2023 [spotlessApply]">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.library.Main" />
       <module name="Summative2023.main" />
@@ -175,8 +177,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Summative2023 [spotlessApply]" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.Summative2023 [spotlessApply]" />
         <item itemvalue="Gradle.Summative2023 [run]" />
       </list>
     </recent_temporary>
@@ -201,6 +203,7 @@
       <workItem from="1683728574764" duration="4572000" />
       <workItem from="1683815275153" duration="5193000" />
       <workItem from="1683905537244" duration="4174000" />
+      <workItem from="1684163023792" duration="5308000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1682699097882</created>

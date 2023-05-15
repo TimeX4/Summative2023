@@ -17,6 +17,14 @@ public class LibraryGUI {
                 actionEvent -> {
                     String user = usernameTextField.getText(); // TODO: -1 For Librarian
                     String pword = String.valueOf(passwordPasswordField.getPassword());
+                    if (user.equals("-1") && pword.equals("librarian")) {
+                        LibrarianPanel page = new LibrarianPanel(frame, this);
+                        frame.setContentPane(page.getPanel());
+                        frame.validate();
+                        frame.repaint();
+                        clear();
+                        return;
+                    }
                     Pateron pateron = Pateron.getLoadedPaterons().get(Long.parseLong(user));
                     if (pateron.getPassword().equals(pword)) {
                         PateronPage page = new PateronPage(pateron, frame, this);
