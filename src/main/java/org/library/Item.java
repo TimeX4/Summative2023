@@ -3,12 +3,15 @@ package org.library;
 
 import org.file.*;
 
+import java.sql.Ref;
 import java.util.ArrayList;
 
 public abstract class Item {
-    // Load from file
     private static long NEXT_ID = GetNextID();
-    // private static long NEXT_ID = 0;
+
+    public boolean getReferenceOnly() {
+        return ReferenceOnly;
+    }
 
     public enum CSV_INDEX {
         ID,
@@ -21,30 +24,28 @@ public abstract class Item {
     protected String Title;
     protected final long ID;
     protected int Copies;
-    protected ArrayList<Pateron> CheckOuts;
+    protected ArrayList<Patron> CheckOuts;
     protected int MaxCheckoutDays;
     protected boolean ReferenceOnly;
 
-    Item(String name, int copies, int days, String out) {
+    Item(String name, int copies, int days) {
         Title = name;
         Copies = copies;
         MaxCheckoutDays = days;
-        CheckOuts = ParseCheckouts(out);
+        CheckOuts = ParseCheckouts("");
 
         ID = NEXT_ID++;
     }
 
-    Item(long id, String name, int copies, int days, String out) {
+    Item(long id, String name, int copies, int days, String out, boolean ref) {
         Title = name;
         Copies = copies;
         MaxCheckoutDays = days;
         CheckOuts = ParseCheckouts(out);
+        ReferenceOnly = ref;
 
         ID = id;
     }
-
-    // TODO: Load from file on startup with proper ids, here and paterons.
-    // TODO: Write to file on cleanup, here and paterons.
 
     /**
      * Converts an Item object to a CSV string.
@@ -54,25 +55,25 @@ public abstract class Item {
     public abstract String ToCSV();
 
     /**
-     * Parses checkout info from CSV into a list of paterons who have checked out the item.
+     * Parses checkout info from CSV into a list of Patrons who have checked out the item.
      *
      * @param out The CSV to be parsed.
-     * @return An array of Paterons who have checked out the given item.
+     * @return An array of Patrons who have checked out the given item.
      */
-    private ArrayList<Pateron> ParseCheckouts(String out) {
+    private ArrayList<Patron> ParseCheckouts(String out) {
         if (out.equals("") || out.equals("{}"))
             return new ArrayList<>(); // Checkouts list is empty.
         out = out.substring(1, out.length() - 1); // Remove the encapsulating {}.
         String[] s = out.split(":"); // Split the list into its values.
-        ArrayList<Pateron> l = new ArrayList<>();
+        ArrayList<Patron> l = new ArrayList<>();
         for (int i = 0; i < s.length; i++) {
             long id = Long.parseLong(s[i]);
             try {
                 String item =
-                        Pateron.file.GetFromID(
-                                id); // Get the matching Pateron if one exists with the provided id.
+                        Patron.file.GetFromID(
+                                id); // Get the matching Patron if one exists with the provided id.
                 if (item.equals("")) continue;
-                l.add(Pateron.FromCSV(item));
+                l.add(Patron.FromCSV(item));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -83,13 +84,13 @@ public abstract class Item {
     /**
      * Builds a CSV string from the given items Checkout list.
      *
-     * @return A CSV string of Pateron ids.
+     * @return A CSV string of Patron ids.
      */
     public String CheckoutsToCSV() {
         if (CheckOuts.size() == 0) return "{}"; // Checkouts list is empty.
         StringBuilder str = new StringBuilder();
         str.append("{"); // Add our opening bracket.
-        for (Pateron s : CheckOuts) {
+        for (Patron s : CheckOuts) {
             str.append(s.getID()).append(":"); // Add the id and a :
         }
         str.deleteCharAt(str.length()); // Remove the trailing :
@@ -137,6 +138,22 @@ public abstract class Item {
      */
     public int getCopies() {
         return Copies;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public void setCopies(int copies) {
+        Copies = copies;
+    }
+
+    public void setMaxCheckoutDays(int maxCheckoutDays) {
+        MaxCheckoutDays = maxCheckoutDays;
+    }
+
+    public void setReferenceOnly(boolean referenceOnly) {
+        ReferenceOnly = referenceOnly;
     }
 
     /** Decrements copies by 1. */

@@ -4,26 +4,39 @@ package org.gui;
 import javax.swing.*;
 
 public class LibrarianPanel {
-    private JButton viewPateronsButton;
-    private JButton addPateronButton;
+    private JButton viewPatronsButton;
+    private JButton addPatronButton;
     private JButton addBookButton;
     private JButton viewBooksButton;
     private JPanel OptionsPanel;
     private JButton logoutButton;
 
     public LibrarianPanel(JFrame frame, LibraryGUI libraryGUI) {
-        viewPateronsButton.addActionListener(
+        viewPatronsButton.addActionListener(
                 actionEvent -> {
-                    AllPaterons page = new AllPaterons(frame, libraryGUI, this);
+                    AllPatrons page = new AllPatrons(frame, libraryGUI, this);
                     frame.setContentPane(page.getPanel());
                     frame.validate();
                     frame.repaint();
                 });
-        addPateronButton.addActionListener(actionEvent -> {});
-
-        addBookButton.addActionListener(actionEvent -> {});
-
-        viewBooksButton.addActionListener(actionEvent -> {});
+        addPatronButton.addActionListener(actionEvent -> {
+            AddPatron page = new AddPatron(frame,this);
+            frame.setContentPane(page.getPanel());
+            frame.validate();
+            frame.repaint();
+        });
+        addBookButton.addActionListener(actionEvent -> {
+            AddItem page = new AddItem(frame,this);
+            frame.setContentPane(page.getPanel());
+            frame.validate();
+            frame.repaint();
+        });
+        viewBooksButton.addActionListener(actionEvent -> {
+            AllItems page = new AllItems(frame, this);
+            frame.setContentPane(page.getPanel());
+            frame.validate();
+            frame.repaint();
+        });
 
         logoutButton.addActionListener(
                 actionEvent -> {

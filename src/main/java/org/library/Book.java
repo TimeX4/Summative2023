@@ -20,13 +20,13 @@ public class Book extends Item {
     public static final CSV file = new CSV("/library_files/books.csv");
     private static HashMap<Long, Book> loadedBooks = LoadBooks();
 
-    public Book(String name, String author, int copies, int days, String out) {
-        super(name, copies, days, out);
+    public Book(String name, String author, int copies, int days) {
+        super(name, copies, days);
         Author = author;
     }
 
-    public Book(long id, String name, String author, int copies, int days, String out) {
-        super(id, name, copies, days, out);
+    public Book(long id, String name, String author, int copies, int days, String out, boolean ref) {
+        super(id, name, copies, days, out, ref);
         Author = author;
     }
 
@@ -37,7 +37,8 @@ public class Book extends Item {
         s += Author + ",";
         s += Copies + ",";
         s += MaxCheckoutDays + ",";
-        s += CheckoutsToCSV();
+        s += CheckoutsToCSV() + ",";
+        s += ReferenceOnly;
         return s;
     }
 
@@ -56,7 +57,8 @@ public class Book extends Item {
         int copies = Integer.parseInt(tokens.get(3));
         int time = Integer.parseInt(tokens.get(4));
         String out = tokens.get(5);
-        return new Book(id, name, author, copies, time, out);
+        boolean ref = Boolean.parseBoolean(tokens.get(6));
+        return new Book(id, name, author, copies, time, out, ref);
     }
 
     private static HashMap<Long, Book> LoadBooks() {
@@ -79,7 +81,8 @@ public class Book extends Item {
                 + Copies
                 + " | Due: "
                 + MaxCheckoutDays
-                + " days after checkout.";
+                + " days after checkout."
+                + (ReferenceOnly ? "Reference Only" : "");
     }
 
     /**
@@ -95,7 +98,7 @@ public class Book extends Item {
         return loadedBooks;
     }
 
-    public static void setLoadedBooks(HashMap<Long, Book> loadedBooks) {
-        Book.loadedBooks = loadedBooks;
+    public void setAuthor(String author) {
+        Author = author;
     }
 }

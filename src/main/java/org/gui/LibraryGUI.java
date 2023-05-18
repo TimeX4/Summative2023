@@ -1,7 +1,7 @@
 /* (C)2023 */
 package org.gui;
 
-import org.library.Pateron;
+import org.library.Patron;
 
 import javax.swing.*;
 
@@ -15,9 +15,11 @@ public class LibraryGUI {
     public LibraryGUI(JFrame frame) {
         loginButton.addActionListener(
                 actionEvent -> {
-                    String user = usernameTextField.getText(); // TODO: -1 For Librarian
+                    String user = usernameTextField.getText();
                     String pword = String.valueOf(passwordPasswordField.getPassword());
-                    if (user.equals("-1") && pword.equals("librarian")) {
+                    if (user.equals("-1")) {
+                        if (!pword.equals("librarian"))
+                            return;
                         LibrarianPanel page = new LibrarianPanel(frame, this);
                         frame.setContentPane(page.getPanel());
                         frame.validate();
@@ -25,14 +27,19 @@ public class LibraryGUI {
                         clear();
                         return;
                     }
-                    Pateron pateron = Pateron.getLoadedPaterons().get(Long.parseLong(user));
-                    if (pateron.getPassword().equals(pword)) {
-                        PateronPage page = new PateronPage(pateron, frame, this);
+                    long id = Long.parseLong(user);
+                    if (!Patron.getLoadedPatrons().containsKey(id)) {
+                        usernameTextField.setText("Patron not found");
+                        return;
+                    }
+                    Patron patron = Patron.getLoadedPatrons().get(id);
+                    if (patron.getPassword().equals(pword)) {
+                        PatronPage page = new PatronPage(patron, frame, this);
                         frame.setContentPane(page.getPanel());
                         frame.validate();
                         frame.repaint();
                         clear();
-                    } // TODO: ELSE Password is wrong or user is wrong
+                    } else usernameTextField.setText("Incorrect Password");
                 });
         clearButton.addActionListener(
                 actionEvent -> {

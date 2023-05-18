@@ -4,6 +4,7 @@ package org.file;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ public class File {
         try {
             stream = File.class.getResourceAsStream(readPath);
         } catch (Exception e) {
+            System.out.println("OpenFile Failed.");
             e.printStackTrace();
         }
         return stream;
@@ -165,14 +167,14 @@ public class File {
             // iterate over the file until we hit the line we want, store it and break (not return
             // to close handles)
             while ((line = file.readLine())
-                    != null) { // if item is not found will return the last line, need some way to
-                // validate this but lazy
-                // TODO: FIX THIS ^
+                    != null) {
                 if (i == idx) {
                     break;
                 }
                 i++;
             }
+            // We are at the end of the file and our idx hasn't been found make sure we don't return the last line.
+            if (i == file.lines().count() && i != idx) line = "";
             inp.close();
             file.close();
         } catch (Exception e) {

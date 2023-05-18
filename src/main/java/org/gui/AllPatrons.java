@@ -1,39 +1,40 @@
 /* (C)2023 */
 package org.gui;
 
-import org.library.Pateron;
+import org.library.Patron;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 
 import javax.swing.*;
 
-public class AllPaterons {
-    private JPanel AllPaterons;
+public class AllPatrons {
+    private JPanel AllPatrons;
     private JList<String> list1;
-    private JButton deletePateron;
-    private JButton editPateron;
-    private JButton selectPateron;
+    private JButton deletePatron;
+    private JButton editPatron;
+    private JButton selectPatron;
     private JButton backButton;
     private final DefaultListModel<String> listModel = new DefaultListModel<>();
 
-    public AllPaterons(JFrame frame, LibraryGUI libraryGUI, LibrarianPanel librarianPanel) {
-
-        for (Map.Entry<Long, Pateron> entry : Pateron.getLoadedPaterons().entrySet()) {
+    public AllPatrons(JFrame frame, LibraryGUI libraryGUI, LibrarianPanel librarianPanel) {
+        for (Map.Entry<Long, Patron> entry : Patron.getLoadedPatrons().entrySet()) {
             Long key = entry.getKey();
-            Pateron pateron = entry.getValue();
-            if (pateron != null) {
-                listModel.addElement(pateron.toString());
+            Patron Patron = entry.getValue();
+            if (Patron != null) {
+                listModel.addElement(Patron.toString());
             }
         }
         list1.setModel(listModel);
-        deletePateron.addActionListener(
+        deletePatron.addActionListener(
                 actionEvent -> {
                     int idx = list1.getSelectedIndex();
                     int i = 0;
-                    for (Map.Entry<Long, Pateron> entry : Pateron.getLoadedPaterons().entrySet()) {
+                    for (Map.Entry<Long, Patron> entry : Patron.getLoadedPatrons().entrySet()) {
                         if (i == idx) {
                             Long id = entry.getKey();
-                            Pateron.DeletePateron(id);
+                            Patron.DeletePatron(id);
                             listModel.remove(idx);
                             list1.setModel(listModel);
                             list1.revalidate();
@@ -42,13 +43,13 @@ public class AllPaterons {
                         i++;
                     }
                 });
-        editPateron.addActionListener(
+        editPatron.addActionListener(
                 actionEvent -> {
                     int idx = list1.getSelectedIndex();
                     int i = 0;
-                    for (Map.Entry<Long, Pateron> entry : Pateron.getLoadedPaterons().entrySet()) {
+                    for (Map.Entry<Long, Patron> entry : Patron.getLoadedPatrons().entrySet()) {
                         if (i == idx) {
-                            EditPateron form = new EditPateron(entry.getValue(), frame, this, idx);
+                            EditPatron form = new EditPatron(entry.getValue(), frame, this, idx);
                             frame.setContentPane(form.getPanel());
                             frame.validate();
                             frame.repaint();
@@ -56,15 +57,15 @@ public class AllPaterons {
                         i++;
                     }
                 });
-        selectPateron.addActionListener(
+        selectPatron.addActionListener(
                 actionEvent -> {
                     int idx = list1.getSelectedIndex();
                     int i = 0;
-                    for (Map.Entry<Long, Pateron> entry : Pateron.getLoadedPaterons().entrySet()) {
+                    for (Map.Entry<Long, Patron> entry : Patron.getLoadedPatrons().entrySet()) {
                         if (i == idx) {
                             Long id = entry.getKey();
-                            Pateron pateron = Pateron.getLoadedPaterons().get(id);
-                            PateronPage page = new PateronPage(pateron, frame, libraryGUI);
+                            Patron patron = Patron.getLoadedPatrons().get(id);
+                            PatronPage page = new PatronPage(patron, frame, libraryGUI);
                             frame.setContentPane(page.getPanel());
                             frame.validate();
                             frame.repaint();
@@ -81,7 +82,7 @@ public class AllPaterons {
     }
 
     public JPanel getPanel() {
-        return AllPaterons;
+        return AllPatrons;
     }
 
     public JList<String> getItemList() {

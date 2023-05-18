@@ -1,0 +1,2 @@
+Id,Name,Copies,MaxCheckoutDays,Out,RenewalDays,ReferenceOnly
+0,Magaziner,5,5,{},5,false

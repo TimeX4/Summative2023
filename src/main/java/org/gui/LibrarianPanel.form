@@ -30,20 +30,20 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="c110d" class="javax.swing.JButton" binding="viewPateronsButton" default-binding="true">
+              <component id="c110d" class="javax.swing.JButton" binding="viewPatronsButton" default-binding="true">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="View Paterons"/>
+                  <text value="View Patrons"/>
                 </properties>
               </component>
-              <component id="d1732" class="javax.swing.JButton" binding="addPateronButton" default-binding="true">
+              <component id="d1732" class="javax.swing.JButton" binding="addPatronButton" default-binding="true">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Add Pateron"/>
+                  <text value="Add Patron"/>
                 </properties>
               </component>
               <component id="1cfec" class="javax.swing.JButton" binding="addBookButton" default-binding="true">

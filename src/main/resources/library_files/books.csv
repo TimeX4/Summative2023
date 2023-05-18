@@ -1,4 +1,4 @@
-Id,Name,Author,Copies,MaxCheckoutDays,Out
-0,Bob the Builder,Joe Swanson,3,5,{0:1:2:4}
-1,ASDASD,Mark Twain,3,5,{}
-11,Ivanova,Bob,3,-1,{}
+Id,Name,Author,Copies,MaxCheckoutDays,Out,ReferenceOnly
+0,Bob the Builder,Joe Swanson,3,5,{0:1:2:4},false
+1,ASDASD,Mark Twain,3,5,{},false
+11,Ivanova,Bob,3,-1,{},false

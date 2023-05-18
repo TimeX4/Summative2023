@@ -10,12 +10,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 
-public class Pateron {
-    // Load from file
+public class Patron {
     private static long NEXT_ID = GetNextID();
-    // private static long NEXT_ID = 0;
-    public static final CSV file = new CSV("/library_files/paterons.csv");
-    private static HashMap<Long, Pateron> loadedPaterons = LoadPaterons();
+    public static final CSV file = new CSV("/library_files/patrons.csv");
+    private static HashMap<Long, Patron> loadedPatrons = LoadPatrons();
 
     private String Name;
     private String PhoneNumber;
@@ -33,17 +31,17 @@ public class Pateron {
         PASSWORD
     }
 
-    Pateron(String name, String number, float fees, String out, String pword) {
+    public Patron(String name, String number, String pword) {
         Name = name;
         PhoneNumber = number;
-        DueFees = fees;
-        CheckedOut = ParseCheckedOut(out);
+        DueFees = 0.0f;
+        CheckedOut = ParseCheckedOut("");
         Password = pword;
 
         ID = NEXT_ID++;
     }
 
-    Pateron(long id, String name, String number, float fees, String out, String pword) {
+    private Patron(long id, String name, String number, float fees, String out, String pword) {
         Name = name;
         PhoneNumber = number;
         DueFees = fees;
@@ -53,12 +51,12 @@ public class Pateron {
         ID = id;
     }
 
-    public static void DeletePateron(long id) {
-        loadedPaterons.remove(id);
+    public static void DeletePatron(long id) {
+        loadedPatrons.remove(id);
     }
 
     /**
-     * Converts a Pateron to a CSV string.
+     * Converts a Patron to a CSV string.
      *
      * @return A CSV string.
      */
@@ -74,12 +72,12 @@ public class Pateron {
     }
 
     /**
-     * Converts a CSV string into a Pateron object.
+     * Converts a CSV string into a Patron object.
      *
      * @param csv The CSV string.
-     * @return A new Pateron object.
+     * @return A new Patron object.
      */
-    public static Pateron FromCSV(String csv) {
+    public static Patron FromCSV(String csv) {
         if (csv.equals("")) return null;
         List<String> tokens = CSV.ParseCSV(csv);
         long id = Long.parseLong(tokens.get(0));
@@ -88,16 +86,18 @@ public class Pateron {
         float fees = Float.parseFloat(tokens.get(3));
         String out = tokens.get(4);
         String pword = tokens.get(5);
-        return new Pateron(id, name, number, fees, out, pword);
+        return new Patron(id, name, number, fees, out, pword);
     }
 
     /**
-     * Adds an item to the paterons CheckedOut list with the checkout date as the current time.
+     * Adds an item to the Patrons CheckedOut list with the checkout date as the current time.
      *
      * @param b The item to add.
      */
     public void CheckOut(Item b) {
+        if (b.getReferenceOnly()) return;
         if (b.getCopies() <= 0) return; // TODO: Unable to checkout.
+        if (CheckedOut.containsKey(b.getID())) return; // TODO: Tell them why can't checkedout twice.
         LocalDate date = LocalDate.now();
         CheckedOut.put(b.getID(), date);
         b.decrementCopies();
@@ -121,7 +121,6 @@ public class Pateron {
                         ChronoUnit.DAYS); // Calculate the max date that the book can be out for.
         b.Copies++; // Add the stock back
         CheckedOut.remove(b.ID); // Remove the book from the users checked out list.
-        // TODO: Write changes to the file.
         if (max.isAfter(now)) {
             return 0.0f; // No fee the book was on time
         } else {
@@ -136,9 +135,9 @@ public class Pateron {
     }
 
     /**
-     * Converts a paterons checked out list to CSV of the format {id:date|id:date}
+     * Converts a Patrons checked out list to CSV of the format {id:date|id:date}
      *
-     * @return CSV of the Pateron object.
+     * @return CSV of the Patron object.
      */
     public String CheckoutToCSV() {
         if (CheckedOut.size() == 0) return "{}";
@@ -161,7 +160,7 @@ public class Pateron {
     }
 
     /**
-     * Parses a CSV string into a hashmap containing keys of pateron ids and values of checkout
+     * Parses a CSV string into a hashmap containing keys of Patron ids and values of checkout
      * dates.
      *
      * @param out The CSV to be parsed.
@@ -181,12 +180,12 @@ public class Pateron {
         return hash;
     }
 
-    private static HashMap<Long, Pateron> LoadPaterons() {
-        HashMap<Long, Pateron> loaded = new HashMap<>();
+    private static HashMap<Long, Patron> LoadPatrons() {
+        HashMap<Long, Patron> loaded = new HashMap<>();
         int i = 0;
-        for (String s : Pateron.file.getStrings()) {
+        for (String s : Patron.file.getStrings()) {
             if (i++ == 0) continue;
-            Pateron b = FromCSV(s);
+            Patron b = FromCSV(s);
             if (b == null) continue;
             loaded.put(b.getID(), b);
         }
@@ -194,15 +193,15 @@ public class Pateron {
     }
 
     /**
-     * Getter for {@link Pateron#ID}.
+     * Getter for {@link Patron#ID}.
      *
-     * @return {@link Pateron#ID}.
+     * @return {@link Patron#ID}.
      */
     public long getID() {
         return ID;
     }
     /**
-     * Gets the stored NEXT_ID. TO BE CALLED ONCE AT PROGRAM STARTUP. SEE {@link Pateron#NEXT_ID}.
+     * Gets the stored NEXT_ID. TO BE CALLED ONCE AT PROGRAM STARTUP. SEE {@link Patron#NEXT_ID}.
      *
      * @return NEXT_ID as a long.
      */
@@ -212,25 +211,25 @@ public class Pateron {
     }
 
     /**
-     * Getter for {@link Pateron#Name}.
+     * Getter for {@link Patron#Name}.
      *
-     * @return {@link Pateron#Name}.
+     * @return {@link Patron#Name}.
      */
     public String getName() {
         return Name;
     }
 
     /**
-     * Getter for {@link Pateron#CheckedOut}.
+     * Getter for {@link Patron#CheckedOut}.
      *
-     * @return {@link Pateron#CheckedOut}.
+     * @return {@link Patron#CheckedOut}.
      */
     public HashMap<Long, LocalDate> getCheckedOut() {
         return CheckedOut;
     }
 
     /**
-     * Sets the value of {@link Pateron#CheckedOut} at a given key.
+     * Sets the value of {@link Patron#CheckedOut} at a given key.
      *
      * @param key The key to modify (or insert).
      * @param value The value to be stored at that key.
@@ -239,12 +238,12 @@ public class Pateron {
         CheckedOut.put(key, value);
     }
 
-    public static HashMap<Long, Pateron> getLoadedPaterons() {
-        return loadedPaterons;
+    public static HashMap<Long, Patron> getLoadedPatrons() {
+        return loadedPatrons;
     }
 
-    public static void setLoadedPaterons(HashMap<Long, Pateron> loadedPaterons) {
-        Pateron.loadedPaterons = loadedPaterons;
+    public static void setLoadedPatrons(HashMap<Long, Patron> loadedPatrons) {
+        Patron.loadedPatrons = loadedPatrons;
     }
 
     public String getPassword() {
