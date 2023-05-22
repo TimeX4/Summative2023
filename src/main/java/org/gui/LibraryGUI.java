@@ -1,9 +1,12 @@
 /* (C)2023 */
 package org.gui;
 
+import org.library.Main;
 import org.library.Patron;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class LibraryGUI {
     private JPanel Library;
@@ -64,7 +67,13 @@ public class LibraryGUI {
             throw new RuntimeException(e);
         }
         frame.setContentPane(new LibraryGUI(frame).Library);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Main.cleanup();
+            }
+        });
         frame.setSize(200, 500);
         frame.pack();
         frame.setVisible(true);

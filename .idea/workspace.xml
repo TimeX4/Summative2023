@@ -4,47 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7e4f20f-0e59-47bd-8691-c5d20d1f4744" name="Changes" comment="Initial Commit">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/AddItem.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/AddItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/AddPatron.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/AddPatron.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllItems.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllItems.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllPatrons.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllPatrons.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/EditItem.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/EditItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/EditPatron.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/EditPatron.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/PatronPage.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/gui/PatronPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/library_files/magazine.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="d7e4f20f-0e59-47bd-8691-c5d20d1f4744" name="Changes" comment="Continued work on GUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/file/CSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/file/CSV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/file/Exceptions.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/file/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/file/File.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/AllBooks.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllItemsUser.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/AllBooks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllItemsUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/AllPaterons.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/AllPaterons.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/EditPateron.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/EditPateron.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/AllItemsUser.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllItemsUser.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/AllItemsUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllItemsUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/LibrarianPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/LibrarianPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/LibrarianPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/LibrarianPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/LibraryGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/LibraryGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/PateronPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/PatronPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/PatronPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Interface.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Library.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Magazine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Magazine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Pateron.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Patron.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Patron.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Patron.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/books.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/books.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/next_id" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/next_id" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/paterons.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/patrons.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/magazine.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/magazine.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/patrons.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/patrons.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,6 +214,8 @@
       <workItem from="1684334983468" duration="5250000" />
       <workItem from="1684416769569" duration="343000" />
       <workItem from="1684418240577" duration="9808000" />
+      <workItem from="1684603939334" duration="40000" />
+      <workItem from="1684780461398" duration="2110000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1682699097882</created>
@@ -278,10 +257,10 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Summative2023$Summative2023__test_.ic" NAME="Summative2023 [test] Coverage Results" MODIFIED="1683049983091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Summative2023$Summative2023__run_.ic" NAME="Summative2023 [run] Coverage Results" MODIFIED="1683050060339" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Summative2023$Main.ic" NAME="Main Coverage Results" MODIFIED="1684416787397" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.library.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Summative2023$Summative2023__test_.ic" NAME="Summative2023 [test] Coverage Results" MODIFIED="1683049983091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Summative2023$Summative2023__run_.ic" NAME="Summative2023 [run] Coverage Results" MODIFIED="1683220103006" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

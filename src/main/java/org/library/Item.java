@@ -5,6 +5,7 @@ import org.file.*;
 
 import java.sql.Ref;
 import java.util.ArrayList;
+import java.util.Map;
 
 public abstract class Item {
     private static long NEXT_ID = GetNextID();
@@ -68,15 +69,9 @@ public abstract class Item {
         ArrayList<Patron> l = new ArrayList<>();
         for (int i = 0; i < s.length; i++) {
             long id = Long.parseLong(s[i]);
-            try {
-                String item =
-                        Patron.file.GetFromID(
-                                id); // Get the matching Patron if one exists with the provided id.
-                if (item.equals("")) continue;
-                l.add(Patron.FromCSV(item));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            if (!Patron.getLoadedPatrons().containsKey(id)) continue;
+            Patron p = Patron.getLoadedPatrons().get(id);
+            l.add(p);
         }
         return l;
     }
@@ -93,7 +88,7 @@ public abstract class Item {
         for (Patron s : CheckOuts) {
             str.append(s.getID()).append(":"); // Add the id and a :
         }
-        str.deleteCharAt(str.length()); // Remove the trailing :
+        str.deleteCharAt(str.length() - 1); // Remove the trailing :
         str.append("}"); // At the closing bracket.
         System.out.println(str);
         return str.toString();
@@ -111,6 +106,17 @@ public abstract class Item {
     /** Stores NEXT_ID. TO BE CALLED ONCE AT PROGRAM CLEANUP. */
     public static void WriteNextID(File f) {
         f.Write(Long.toString(NEXT_ID), true);
+    }
+
+    public static void WriteDatabases() {
+        Book.file.Write(Book.CSV_HEADER, false);
+        for (Map.Entry<Long, Book> entry : Book.getLoadedBooks().entrySet()) {
+            Book.file.Write(entry.getValue().ToCSV(), true);
+        }
+        Magazine.file.Write(Magazine.CSV_HEADER, false);
+        for (Map.Entry<Long, Magazine> entry : Magazine.getLoadedMagazines().entrySet()) {
+            Magazine.file.Write(entry.getValue().ToCSV(), true);
+        }
     }
 
     /**
@@ -168,5 +174,9 @@ public abstract class Item {
      */
     public int getMaxCheckoutDays() {
         return MaxCheckoutDays;
+    }
+
+    public ArrayList<Patron> getCheckOuts() {
+        return CheckOuts;
     }
 }

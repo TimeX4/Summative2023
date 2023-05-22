@@ -8,6 +8,7 @@ import org.library.Patron;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,10 +23,12 @@ public class AllItemsUser {
     private JButton checkoutButton;
     private JButton homeButton;
     private JComboBox<String> typeCombo;
+    private JTextField searchBar;
     private final DefaultListModel<String> listModel = new DefaultListModel<>();
     private final Patron Patron;
 
-
+// TODO: 2023-05-19 find a way to know which book is selected regardless of the order, sort?, add id to the tostring and parse?, scrap the sorter cuz im lazy af. 
+    
     public AllItemsUser(Patron p, PatronPage PatronPage, JFrame frame) {
         Patron = p;
         checkoutButton.addActionListener(
@@ -51,6 +54,29 @@ public class AllItemsUser {
                 default -> setModelMap(null);
             }
         });
+        searchBar.addActionListener(e -> {
+            String filter = searchBar.getText();
+            if (typeCombo.getSelectedItem() == null) return;
+            switch (typeCombo.getSelectedItem().toString()) {
+                case "Books" -> FilterModel(listModel, filter, Book.getLoadedBooks());
+                case "Magazines" -> FilterModel(listModel, filter, Magazine.getLoadedMagazines());
+            }
+        });
+    }
+
+    public <E> void FilterModel(DefaultListModel<String> model, String filter, HashMap<Long, E> map) {
+        for (Map.Entry<Long, E> entry : map.entrySet()) {
+            String line = entry.getValue().toString();
+            if (!line.startsWith(filter)) {
+                if (model.contains(line)) {
+                    model.removeElement(line);
+                }
+            } else {
+                if (!model.contains(line)) {
+                    model.addElement(line);
+                }
+            }
+        }
     }
 
     private <E> void checkoutItem(int idx, Set<Map.Entry<Long, E>> entrySet, JFrame frame, PatronPage PatronPage) {

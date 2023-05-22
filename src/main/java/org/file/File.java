@@ -4,7 +4,6 @@ package org.file;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
@@ -69,70 +68,6 @@ public class File {
                 writer.newLine(); // If we are appending we need a new line.
             writer.write(content);
             writer.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Edits a specified line of the file based on its index (Starting from 0)
-     *
-     * @param idx The index of the line to edit.
-     * @param newLine The content to replace it with.
-     */
-    public void EditLine(int idx, String newLine) {
-        InputStream inp = OpenFile();
-        BufferedReader file = new BufferedReader(new InputStreamReader(inp));
-        StringBuilder inputBuffer = new StringBuilder();
-        String line;
-        int i = 0;
-        try {
-            // Loop over the file and add each line back to an inputBuffer BUT modify the one we
-            // want.
-            while ((line = file.readLine()) != null) {
-                if (i == idx) {
-                    line = newLine; // Make the changes we want on the line we want.
-                }
-                inputBuffer.append(line);
-                inputBuffer.append('\n');
-                i++;
-            }
-            inp.close();
-            file.close();
-            Write(inputBuffer.toString(), false);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Deletes a specified line of the file based on its index (Starting from 0)
-     *
-     * @param idx The index of the line to delete.
-     */
-    public void DeleteLine(int idx) {
-        InputStream inp = OpenFile();
-        BufferedReader file = new BufferedReader(new InputStreamReader(inp));
-        StringBuilder inputBuffer = new StringBuilder();
-        String line;
-        int i = 0;
-        try {
-            // Loop over the file and add each line back to an inputBuffer BUT skip the one we want
-            // to delete.
-            while ((line = file.readLine()) != null) {
-                if (i == idx) {
-                    i++;
-                    continue;
-                }
-                inputBuffer.append(line);
-                inputBuffer.append('\n');
-                i++;
-            }
-            // delete the extra newline from the line we omitted
-            inputBuffer.deleteCharAt(inputBuffer.length() - 1);
-            inp.close();
-            file.close();
-            Write(inputBuffer.toString(), false);
         } catch (Exception e) {
             e.printStackTrace();
         }

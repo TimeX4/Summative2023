@@ -9,10 +9,12 @@ import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Patron {
     private static long NEXT_ID = GetNextID();
     public static final CSV file = new CSV("/library_files/patrons.csv");
+    public static final String CSV_HEADER = "Id,Name,Number,Fees,Out,Password";
     private static HashMap<Long, Patron> loadedPatrons = LoadPatrons();
 
     private String Name;
@@ -98,6 +100,7 @@ public class Patron {
         if (b.getReferenceOnly()) return;
         if (b.getCopies() <= 0) return; // TODO: Unable to checkout.
         if (CheckedOut.containsKey(b.getID())) return; // TODO: Tell them why can't checkedout twice.
+        b.getCheckOuts().add(this);
         LocalDate date = LocalDate.now();
         CheckedOut.put(b.getID(), date);
         b.decrementCopies();
@@ -132,6 +135,13 @@ public class Patron {
     /** Stores NEXT_ID. TO BE CALLED ONCE AT PROGRAM CLEANUP. */
     public static void WriteNextID(File f) {
         f.Write(Long.toString(NEXT_ID), true);
+    }
+
+    public static void WriteDatabases() {
+        Patron.file.Write(Patron.CSV_HEADER, false);
+        for (Map.Entry<Long, Patron> entry : Patron.getLoadedPatrons().entrySet()) {
+            Patron.file.Write(entry.getValue().ToCSV(), true);
+        }
     }
 
     /**

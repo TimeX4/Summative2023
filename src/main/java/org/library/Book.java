@@ -7,17 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Book extends Item {
-    public enum CSV_INDEX {
-        ID,
-        TITLE,
-        AUTHOR,
-        COPIES,
-        MAX_TIME,
-        CHECKOUTS
-    }
-
     private String Author;
     public static final CSV file = new CSV("/library_files/books.csv");
+    public static final String CSV_HEADER = "Id,Name,Author,Copies,MaxCheckoutDays,Out,ReferenceOnly";
     private static HashMap<Long, Book> loadedBooks = LoadBooks();
 
     public Book(String name, String author, int copies, int days) {
@@ -82,7 +74,7 @@ public class Book extends Item {
                 + " | Due: "
                 + MaxCheckoutDays
                 + " days after checkout."
-                + (ReferenceOnly ? "Reference Only" : "");
+                + (ReferenceOnly ? " Reference Only" : "");
     }
 
     /**
