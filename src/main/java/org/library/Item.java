@@ -13,18 +13,10 @@ public abstract class Item {
         return ReferenceOnly;
     }
 
-    public enum CSV_INDEX {
-        ID,
-        TITLE,
-        COPIES,
-        MAX_TIME,
-        CHECKOUTS
-    }
-
     protected String Title;
     protected final long ID;
     protected int Copies;
-    protected ArrayList<Patron> CheckOuts;
+    protected final ArrayList<Patron> CheckOuts;
     protected int MaxCheckoutDays;
     protected boolean ReferenceOnly;
 
@@ -48,13 +40,6 @@ public abstract class Item {
     }
 
     /**
-     * Converts an Item object to a CSV string.
-     *
-     * @return A CSV string.
-     */
-    public abstract String ToCSV();
-
-    /**
      * Parses checkout info from CSV into a list of Patrons who have checked out the item.
      *
      * @param out The CSV to be parsed.
@@ -66,8 +51,8 @@ public abstract class Item {
         out = out.substring(1, out.length() - 1); // Remove the encapsulating {}.
         String[] s = out.split(":"); // Split the list into its values.
         ArrayList<Patron> l = new ArrayList<>();
-        for (int i = 0; i < s.length; i++) {
-            long id = Long.parseLong(s[i]);
+        for (String value : s) {
+            long id = Long.parseLong(value);
             if (!Patron.getLoadedPatrons().containsKey(id)) continue;
             Patron p = Patron.getLoadedPatrons().get(id);
             l.add(p);
@@ -101,11 +86,16 @@ public abstract class Item {
         File f = new File("/library_files/next_id");
         return Long.parseLong(f.GetLine(0));
     }
-    /** Stores NEXT_ID. TO BE CALLED ONCE AT PROGRAM CLEANUP. */
+    /**
+     * Stores NEXT_ID. TO BE CALLED ONCE AT PROGRAM CLEANUP.
+     *
+     * @param f The file to write the next id to.
+     */
     public static void WriteNextID(File f) {
         f.Write(Long.toString(NEXT_ID), true);
     }
 
+    /** Writes the loaded items to disk. TO BE CALLED ONCE AT PROGRAM CLEANUP. */
     public static void WriteDatabases() {
         Book.file.Write(Book.CSV_HEADER, false);
         for (Map.Entry<Long, Book> entry : Book.getLoadedBooks().entrySet()) {
@@ -115,8 +105,18 @@ public abstract class Item {
         for (Map.Entry<Long, Magazine> entry : Magazine.getLoadedMagazines().entrySet()) {
             Magazine.file.Write(entry.getValue().ToCSV(), true);
         }
+        DVD.file.Write(DVD.CSV_HEADER, false);
+        for (Map.Entry<Long, DVD> entry : DVD.getLoadedDVDs().entrySet()) {
+            DVD.file.Write(entry.getValue().ToCSV(), true);
+        }
     }
 
+    /**
+     * Returns the items ID as parsed from the FIRST value of a CSV string.
+     *
+     * @param tostring A CSV string in the form ID,...
+     * @return The ID parsed as a long.
+     */
     public static long getIDFromToString(String tostring) {
         return Long.parseLong(tostring.substring(0, tostring.indexOf(",")));
     }
@@ -148,27 +148,6 @@ public abstract class Item {
         return Copies;
     }
 
-    public void setTitle(String title) {
-        Title = title;
-    }
-
-    public void setCopies(int copies) {
-        Copies = copies;
-    }
-
-    public void setMaxCheckoutDays(int maxCheckoutDays) {
-        MaxCheckoutDays = maxCheckoutDays;
-    }
-
-    public void setReferenceOnly(boolean referenceOnly) {
-        ReferenceOnly = referenceOnly;
-    }
-
-    /** Decrements copies by 1. */
-    public void decrementCopies() {
-        Copies--;
-    }
-
     /**
      * Getter for {@link Item#MaxCheckoutDays}.
      *
@@ -178,7 +157,32 @@ public abstract class Item {
         return MaxCheckoutDays;
     }
 
+    /**
+     * Getter for {@link Item#CheckOuts}.
+     *
+     * @return {@link Item#CheckOuts}.
+     */
     public ArrayList<Patron> getCheckOuts() {
         return CheckOuts;
+    }
+
+    /** Setter for {@link Item#Title}. */
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    /** Setter for {@link Item#Copies}. */
+    public void setCopies(int copies) {
+        Copies = copies;
+    }
+
+    /** Setter for {@link Item#MaxCheckoutDays}. */
+    public void setMaxCheckoutDays(int maxCheckoutDays) {
+        MaxCheckoutDays = maxCheckoutDays;
+    }
+
+    /** Decrements copies by 1. */
+    public void decrementCopies() {
+        Copies--;
     }
 }

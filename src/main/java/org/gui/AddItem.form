@@ -132,6 +132,7 @@
           <model>
             <item value="Book"/>
             <item value="Magazine"/>
+            <item value="DVDs"/>
           </model>
         </properties>
       </component>

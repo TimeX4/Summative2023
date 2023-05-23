@@ -73,6 +73,7 @@
             <item value="Select"/>
             <item value="Books"/>
             <item value="Magazines"/>
+            <item value="DVDs"/>
           </model>
         </properties>
       </component>

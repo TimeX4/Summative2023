@@ -11,7 +11,7 @@ public class Magazine extends Item {
     public static final CSV file = new CSV("/library_files/magazine.csv");
     public static final String CSV_HEADER =
             "Id,Name,Copies,MaxCheckoutDays,Out,RenewalDays,ReferenceOnly";
-    private static HashMap<Long, Magazine> loadedMagazines = LoadMagazines();
+    private static final HashMap<Long, Magazine> loadedMagazines = LoadMagazines();
 
     public Magazine(String name, int copies, int days, int renew) {
         super(name, copies, days);
@@ -23,6 +23,11 @@ public class Magazine extends Item {
         RenewalDate = renew;
     }
 
+    /**
+     * Creates a string from the Magazine object containing useful information for the Library.
+     *
+     * @return A string from the Magazine object containing useful information for the Library.
+     */
     public String toString() {
         return ID
                 + ", "
@@ -38,6 +43,11 @@ public class Magazine extends Item {
                 + (ReferenceOnly ? "Reference Only" : "");
     }
 
+    /**
+     * Convert a Magazine object to a CSV file that can be written to the file.
+     *
+     * @return A CSV String to be written to a file.
+     */
     public String ToCSV() {
         String s = "";
         s += ID + ",";
@@ -69,6 +79,12 @@ public class Magazine extends Item {
         return new Magazine(id, name, copies, days, out, renew, ref);
     }
 
+    /**
+     * Loads all the books from the disk and stores them in {@link Magazine#loadedMagazines}.
+     *
+     * @return A HashMap<Long, Magazine> containing the loaded books. (To be stored in {@link
+     *     Magazine#loadedMagazines}).
+     */
     private static HashMap<Long, Magazine> LoadMagazines() {
         int i = 0;
         HashMap<Long, Magazine> loaded = new HashMap<>();
@@ -90,10 +106,16 @@ public class Magazine extends Item {
         return RenewalDate;
     }
 
+    /**
+     * Getter for {@link Magazine#loadedMagazines}.
+     *
+     * @return {@link Magazine#loadedMagazines}.
+     */
     public static HashMap<Long, Magazine> getLoadedMagazines() {
         return loadedMagazines;
     }
 
+    /** Setter for {@link Magazine#RenewalDate}. */
     public void setRenewalDate(int renewalDate) {
         RenewalDate = renewalDate;
     }

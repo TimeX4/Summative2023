@@ -1,10 +1,10 @@
 /* (C)2023 */
 package org.gui;
 
-import org.library.Book;
-import org.library.Item;
-import org.library.Magazine;
-import org.library.Patron;
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
+
+import org.library.*;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -52,6 +52,7 @@ public class AllItemsUser {
                     switch (typeCombo.getSelectedItem().toString()) {
                         case "Books" -> setModelMap(Book.getLoadedBooks().entrySet());
                         case "Magazines" -> setModelMap(Magazine.getLoadedMagazines().entrySet());
+                        case "DVDs" -> setModelMap(DVD.getLoadedDVDs().entrySet());
                         default -> setModelMap(null);
                     }
                 });
@@ -74,24 +75,40 @@ public class AllItemsUser {
                         });
     }
 
+    /**
+     * Calls the appropriate {@link #FilterModel(DefaultListModel, String, HashMap)} based on which
+     * Document is selected.
+     */
     public void DocumentChanged() {
         String filter = searchBar.getText();
         if (typeCombo.getSelectedItem() == null) return;
         switch (typeCombo.getSelectedItem().toString()) {
             case "Books" -> FilterModel(listModel, filter, Book.getLoadedBooks());
             case "Magazines" -> FilterModel(listModel, filter, Magazine.getLoadedMagazines());
+            case "DVDs" -> FilterModel(listModel, filter, DVD.getLoadedDVDs());
         }
     }
 
-    public <E> void FilterModel(
+    /**
+     * Filters the active model based on the given search.
+     *
+     * @param model The list model to be updated.
+     * @param filter The text to filter by.
+     * @param map The map containing all the items.
+     * @param <E> The child class of {@link Item}
+     */
+    private <E> void FilterModel(
             DefaultListModel<String> model, String filter, HashMap<Long, E> map) {
         for (Map.Entry<Long, E> entry : map.entrySet()) {
+            // Iterate over the loaded items and get the current string.
             String line = entry.getValue().toString();
+            // If our line doesn't contain the active search, remove it.
             if (!line.contains(filter)) {
                 if (model.contains(line)) {
                     model.removeElement(line);
                 }
             } else {
+                // If the model doesn't already have our current line, add it.
                 if (!model.contains(line)) {
                     model.addElement(line);
                 }
@@ -99,15 +116,28 @@ public class AllItemsUser {
         }
     }
 
+    /**
+     * Checks out the selected item.
+     *
+     * @param id The id of the item.
+     * @param idx The index of the item in the active list model.
+     * @param PatronPage The PatronPage belonging to the patron, used to update the checked out list
+     *     on that page. See {@link PatronPage#revalidateModel()}
+     */
     private void checkoutItem(long id, int idx, PatronPage PatronPage) {
         Item item = null;
+        // Figure out which child class our item belongs to, so we can grab it from the active list.
         if (Book.getLoadedBooks().containsKey(id)) item = Book.getLoadedBooks().get(id);
         else if (Magazine.getLoadedMagazines().containsKey(id))
             item = Magazine.getLoadedMagazines().get(id);
+        else if (DVD.getLoadedDVDs().containsKey(id)) item = DVD.getLoadedDVDs().get(id);
         if (item == null) return;
+        // Checkout that item
         Patron.CheckOut(item);
+        // Revalidate the model on the PatronPage
         PatronPage.revalidateModel();
         System.out.println("Checked out"); // TODO: Tell them due on GUI.
+        // Update the model to reflect the new quantity.
         listModel.remove(idx);
         listModel.insertElementAt(item.toString(), idx);
         ItemsList.setModel(listModel);
@@ -115,9 +145,16 @@ public class AllItemsUser {
         ItemsList.repaint();
     }
 
-    public <E> void setModelMap(Set<Map.Entry<Long, E>> entrySet) {
+    /**
+     * Updates the active model map to the respective hashmap of items.
+     *
+     * @param entrySet The entry set of the hash map.
+     * @param <E> The child class of {@link Item}
+     */
+    private <E> void setModelMap(Set<Map.Entry<Long, E>> entrySet) {
         listModel.clear();
         if (entrySet == null) return;
+        // Iterate over the loaded items list and add each item's to string.
         for (Map.Entry<Long, E> entry : entrySet) {
             E item = entry.getValue();
             if (item != null) {
@@ -127,6 +164,11 @@ public class AllItemsUser {
         ItemsList.setModel(listModel);
     }
 
+    /**
+     * Gets the objects panel property.
+     *
+     * @return The JPanel belonging to the object.
+     */
     public JPanel getPanel() {
         return AllBooksPanel;
     }
@@ -146,23 +188,21 @@ public class AllItemsUser {
      */
     private void $$$setupUI$$$() {
         AllBooksPanel = new JPanel();
-        AllBooksPanel.setLayout(
-                new com.intellij.uiDesigner.core.GridLayoutManager(
-                        5, 1, new Insets(0, 0, 0, 0), -1, -1));
+        AllBooksPanel.setLayout(new GridLayoutManager(5, 1, new Insets(0, 0, 0, 0), -1, -1));
         ItemsScroller = new JScrollPane();
         AllBooksPanel.add(
                 ItemsScroller,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         2,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_BOTH,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK
+                                | GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK
+                                | GridConstraints.SIZEPOLICY_WANT_GROW,
                         null,
                         null,
                         null,
@@ -171,43 +211,39 @@ public class AllItemsUser {
         ItemsList = new JList();
         ItemsScroller.setViewportView(ItemsList);
         Title = new JLabel();
-        Font TItleFont = this.$$$getFont$$$("Arial Narrow", Font.PLAIN, 20, Title.getFont());
-        if (TItleFont != null) Title.setFont(TItleFont);
+        Font TitleFont = this.$$$getFont$$$("Arial Narrow", Font.PLAIN, 20, Title.getFont());
+        if (TitleFont != null) Title.setFont(TitleFont);
         Title.setHorizontalTextPosition(11);
         Title.setText("All Library Items");
         AllBooksPanel.add(
                 Title,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_NONE,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
                         0,
                         false));
         ButtonPanel = new JPanel();
-        ButtonPanel.setLayout(
-                new com.intellij.uiDesigner.core.GridLayoutManager(
-                        1, 2, new Insets(0, 0, 0, 0), -1, -1));
+        ButtonPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         AllBooksPanel.add(
                 ButtonPanel,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         4,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_BOTH,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
                         null,
                         null,
                         null,
@@ -217,16 +253,15 @@ public class AllItemsUser {
         checkoutButton.setText("Checkout");
         ButtonPanel.add(
                 checkoutButton,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         1,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -236,16 +271,15 @@ public class AllItemsUser {
         homeButton.setText("Home");
         ButtonPanel.add(
                 homeButton,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -256,18 +290,19 @@ public class AllItemsUser {
         defaultComboBoxModel1.addElement("Select");
         defaultComboBoxModel1.addElement("Books");
         defaultComboBoxModel1.addElement("Magazines");
+        defaultComboBoxModel1.addElement("DVDs");
         typeCombo.setModel(defaultComboBoxModel1);
         AllBooksPanel.add(
                 typeCombo,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         1,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_WEST,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -277,15 +312,15 @@ public class AllItemsUser {
         searchBar.setToolTipText("Search bar");
         AllBooksPanel.add(
                 searchBar,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         3,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_WEST,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         new Dimension(150, -1),
                         null,

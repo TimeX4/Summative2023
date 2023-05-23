@@ -1,10 +1,10 @@
 /* (C)2023 */
 package org.gui;
 
-import org.library.Book;
-import org.library.Item;
-import org.library.Magazine;
-import org.library.Patron;
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
+
+import org.library.*;
 
 import java.awt.*;
 import java.time.LocalDate;
@@ -31,32 +31,37 @@ public class PatronPage {
     private final DefaultListModel<String> listModel = new DefaultListModel<>();
     private final HashMap<Long, Book> checkedOutBooks = new HashMap<>();
     private final HashMap<Long, Magazine> checkedOutMagazines = new HashMap<>();
+    private final HashMap<Long, DVD> checkedOutDVDs = new HashMap<>();
 
     public PatronPage(Patron p, JFrame frame, LibraryGUI libraryGUI) {
-        // TODO: 2023-05-18 Add search bars.
         Patron = p;
         revalidateModel();
         Back.addActionListener(
                 actionEvent -> {
+                    // Go back to the main libraryGUI panel.
                     frame.setContentPane(libraryGUI.getPanel());
                     frame.validate();
                     frame.repaint();
                 });
         ViewAll.addActionListener(
                 actionEvent -> {
-                    AllItemsUser allBooks = new AllItemsUser(p, this, frame);
-                    frame.setContentPane(allBooks.getPanel());
+                    // View all the items in the library.
+                    AllItemsUser allItems = new AllItemsUser(p, this, frame);
+                    frame.setContentPane(allItems.getPanel());
                     frame.validate();
                     frame.repaint();
                 });
         CheckIn.addActionListener(
                 actionEvent -> {
+                    // Check in the selected item.
                     if (typeCombo.getSelectedItem() == null) return;
                     if (typeCombo.getSelectedItem().toString().equals("Select")) return;
                     if (typeCombo.getSelectedItem().toString().equals("Books"))
                         CheckInItem(checkedOutBooks);
                     else if (typeCombo.getSelectedItem().toString().equals("Magazines"))
                         CheckInItem(checkedOutMagazines);
+                    else if (typeCombo.getSelectedItem().toString().equals("DVD"))
+                        CheckInItem(checkedOutDVDs);
                 });
         typeCombo.addActionListener(
                 actionEvent -> {
@@ -64,27 +69,43 @@ public class PatronPage {
                     switch (typeCombo.getSelectedItem().toString()) {
                         case "Books" -> setModelMap(checkedOutBooks.entrySet());
                         case "Magazines" -> setModelMap(checkedOutMagazines.entrySet());
+                        case "DVDs" -> setModelMap(checkedOutDVDs.entrySet());
                         default -> setModelMap(null);
                     }
                 });
     }
 
+    /**
+     * Iterates over the Patron's checked out list and repopulate the list models based on which
+     * child class the ID is found in.
+     */
     public void revalidateModel() {
         for (Map.Entry<Long, LocalDate> entry : Patron.getCheckedOut().entrySet()) {
             Long key = entry.getKey();
+            // Check which child class of Item the ID belongs to.
             if (Book.getLoadedBooks().containsKey(key))
                 checkedOutBooks.put(key, Book.getLoadedBooks().get(key));
             else if (Magazine.getLoadedMagazines().containsKey(key))
                 checkedOutMagazines.put(key, Magazine.getLoadedMagazines().get(key));
+            else if (DVD.getLoadedDVDs().containsKey(key))
+                checkedOutDVDs.put(key, DVD.getLoadedDVDs().get(key));
         }
+        // Check which model is selected and render it appropriately.
         if (typeCombo.getSelectedItem() == null) return;
         switch (typeCombo.getSelectedItem().toString()) {
             case "Books" -> setModelMap(checkedOutBooks.entrySet());
             case "Magazines" -> setModelMap(checkedOutMagazines.entrySet());
+            case "DVDs" -> setModelMap(checkedOutDVDs.entrySet());
             default -> setModelMap(null);
         }
     }
 
+    /**
+     * Checked in the selected item.
+     *
+     * @param map The hash map of loaded items corresponding to the model.
+     * @param <E> The child class of the {@link Item}.
+     */
     private <E> void CheckInItem(HashMap<Long, E> map) {
         int idx = ItemList.getSelectedIndex();
         int i = 0;
@@ -101,38 +122,30 @@ public class PatronPage {
         }
     }
 
-    public String fancyString(long key) {
-        Item item = null;
-        String string = "ERROR";
-        String unique = "";
-        if (Book.getLoadedBooks().containsKey(key)) {
-            item = Book.getLoadedBooks().get(key);
-            unique = ((Book) item).getAuthor();
-        } else if (Magazine.getLoadedMagazines().containsKey(key)) {
-            item = Magazine.getLoadedMagazines().get(key);
-            unique = "Renewal period: " + ((Magazine) item).getRenewalDate() + " days";
-        }
-        if (item == null) return string;
-        LocalDate value = Patron.getCheckedOut().get(key);
-        LocalDate due = value.plusDays(item.getMaxCheckoutDays());
-        string = item.getTitle() + ", " + unique + " | Due: " + due.toString();
-        return string;
-    }
-
-    public <E> void setModelMap(Set<Map.Entry<Long, E>> entrySet) {
+    /**
+     * Updates the active model map to the respective hashmap of items.
+     *
+     * @param entrySet The entry set of the hash map.
+     * @param <E> The child class of {@link Item}
+     */
+    private <E> void setModelMap(Set<Map.Entry<Long, E>> entrySet) {
         listModel.clear();
         if (entrySet == null) return;
+        // Iterate over the loaded items list and add each item's to string.
         for (Map.Entry<Long, E> entry : entrySet) {
-            Item item = (Item) entry.getValue();
+            E item = entry.getValue();
             if (item != null) {
-                listModel.addElement(fancyString(item.getID()));
+                listModel.addElement(item.toString());
             }
         }
         ItemList.setModel(listModel);
-        ItemList.revalidate();
-        ItemList.repaint();
     }
 
+    /**
+     * Gets the objects panel property.
+     *
+     * @return The JPanel belonging to the object.
+     */
     public JPanel getPanel() {
         return Panel;
     }
@@ -152,26 +165,20 @@ public class PatronPage {
      */
     private void $$$setupUI$$$() {
         Panel = new JPanel();
-        Panel.setLayout(
-                new com.intellij.uiDesigner.core.GridLayoutManager(
-                        4, 1, new Insets(0, 0, 0, 0), -1, -1));
+        Panel.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
         ButtonPanel = new JPanel();
-        ButtonPanel.setLayout(
-                new com.intellij.uiDesigner.core.GridLayoutManager(
-                        1, 3, new Insets(0, 0, 0, 0), -1, -1));
+        ButtonPanel.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
         Panel.add(
                 ButtonPanel,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         3,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_BOTH,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
                         null,
                         null,
                         null,
@@ -181,16 +188,16 @@ public class PatronPage {
         Back.setText("Logout");
         ButtonPanel.add(
                 Back,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK
+                                | GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -200,16 +207,16 @@ public class PatronPage {
         CheckIn.setText("Check In");
         ButtonPanel.add(
                 CheckIn,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         2,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK
+                                | GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -219,38 +226,34 @@ public class PatronPage {
         ViewAll.setText("View Library");
         ButtonPanel.add(
                 ViewAll,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         1,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK
+                                | GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
                         0,
                         false));
         HeaderPanel = new JPanel();
-        HeaderPanel.setLayout(
-                new com.intellij.uiDesigner.core.GridLayoutManager(
-                        1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        HeaderPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         Panel.add(
                 HeaderPanel,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_BOTH,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
                         null,
                         null,
                         null,
@@ -262,15 +265,15 @@ public class PatronPage {
         label1.setText("Checked Out");
         HeaderPanel.add(
                 label1,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_NONE,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -279,17 +282,17 @@ public class PatronPage {
         ListScroller = new JScrollPane();
         Panel.add(
                 ListScroller,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         2,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_BOTH,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK
+                                | GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK
+                                | GridConstraints.SIZEPOLICY_WANT_GROW,
                         null,
                         null,
                         null,
@@ -305,18 +308,19 @@ public class PatronPage {
         defaultComboBoxModel1.addElement("Select");
         defaultComboBoxModel1.addElement("Books");
         defaultComboBoxModel1.addElement("Magazines");
+        defaultComboBoxModel1.addElement("DVDs");
         typeCombo.setModel(defaultComboBoxModel1);
         Panel.add(
                 typeCombo,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         1,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_WEST,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,

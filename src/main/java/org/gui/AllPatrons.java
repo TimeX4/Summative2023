@@ -1,6 +1,9 @@
 /* (C)2023 */
 package org.gui;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
+
 import org.library.Patron;
 
 import java.awt.*;
@@ -21,8 +24,8 @@ public class AllPatrons {
     private final DefaultListModel<String> listModel = new DefaultListModel<>();
 
     public AllPatrons(JFrame frame, LibraryGUI libraryGUI, LibrarianPanel librarianPanel) {
+        // Load every patron and add them to the model.
         for (Map.Entry<Long, Patron> entry : Patron.getLoadedPatrons().entrySet()) {
-            Long key = entry.getKey();
             Patron Patron = entry.getValue();
             if (Patron != null) {
                 listModel.addElement(Patron.toString());
@@ -31,6 +34,8 @@ public class AllPatrons {
         list1.setModel(listModel);
         deletePatron.addActionListener(
                 actionEvent -> {
+                    // Find the selected patron and delete it from both the loaded patrons list and
+                    // the model.
                     int idx = list1.getSelectedIndex();
                     int i = 0;
                     for (Map.Entry<Long, Patron> entry : Patron.getLoadedPatrons().entrySet()) {
@@ -49,6 +54,7 @@ public class AllPatrons {
                 actionEvent -> {
                     int idx = list1.getSelectedIndex();
                     int i = 0;
+                    // Find the selected patron and create an EditPatron form with it selected.
                     for (Map.Entry<Long, Patron> entry : Patron.getLoadedPatrons().entrySet()) {
                         if (i == idx) {
                             EditPatron form = new EditPatron(entry.getValue(), frame, this, idx);
@@ -63,6 +69,7 @@ public class AllPatrons {
                 actionEvent -> {
                     int idx = list1.getSelectedIndex();
                     int i = 0;
+                    // Find the selected patron and view the library from their point of view.
                     for (Map.Entry<Long, Patron> entry : Patron.getLoadedPatrons().entrySet()) {
                         if (i == idx) {
                             Long id = entry.getKey();
@@ -76,6 +83,7 @@ public class AllPatrons {
                     }
                 });
         backButton.addActionListener(
+                // Go back to the librarian panel.
                 actionEvent -> {
                     frame.setContentPane(librarianPanel.getPanel());
                     frame.validate();
@@ -83,14 +91,29 @@ public class AllPatrons {
                 });
     }
 
+    /**
+     * Gets the objects panel property.
+     *
+     * @return The JPanel belonging to the object.
+     */
     public JPanel getPanel() {
         return AllPatrons;
     }
 
+    /**
+     * Gets the objects list property.
+     *
+     * @return The JList belonging to the object.
+     */
     public JList<String> getItemList() {
         return list1;
     }
 
+    /**
+     * Gets the objects list model property.
+     *
+     * @return The DefaultListMod belonging to the object.
+     */
     public DefaultListModel<String> getListModel() {
         return listModel;
     }
@@ -110,46 +133,40 @@ public class AllPatrons {
      */
     private void $$$setupUI$$$() {
         AllPatrons = new JPanel();
-        AllPatrons.setLayout(
-                new com.intellij.uiDesigner.core.GridLayoutManager(
-                        3, 1, new Insets(0, 0, 0, 0), -1, -1));
+        AllPatrons.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$("Arial Narrow", -1, 22, label1.getFont());
         if (label1Font != null) label1.setFont(label1Font);
         label1.setText("Patron List");
         AllPatrons.add(
                 label1,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_NONE,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
                         0,
                         false));
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(
-                new com.intellij.uiDesigner.core.GridLayoutManager(
-                        1, 4, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.setLayout(new GridLayoutManager(1, 4, new Insets(0, 0, 0, 0), -1, -1));
         AllPatrons.add(
                 panel1,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         2,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_BOTH,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
                         null,
                         null,
                         null,
@@ -159,16 +176,15 @@ public class AllPatrons {
         deletePatron.setText("Delete");
         panel1.add(
                 deletePatron,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         1,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -178,16 +194,15 @@ public class AllPatrons {
         editPatron.setText("Edit");
         panel1.add(
                 editPatron,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         2,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -197,16 +212,15 @@ public class AllPatrons {
         selectPatron.setText("Select Patron");
         panel1.add(
                 selectPatron,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         3,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -216,16 +230,15 @@ public class AllPatrons {
         backButton.setText("Back");
         panel1.add(
                 backButton,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -234,17 +247,17 @@ public class AllPatrons {
         final JScrollPane scrollPane1 = new JScrollPane();
         AllPatrons.add(
                 scrollPane1,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         1,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_BOTH,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK
+                                | GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK
+                                | GridConstraints.SIZEPOLICY_WANT_GROW,
                         null,
                         null,
                         null,

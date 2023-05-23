@@ -1,6 +1,9 @@
 /* (C)2023 */
 package org.gui;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
+
 import org.library.Patron;
 
 import java.awt.*;
@@ -27,16 +30,17 @@ public class EditPatron {
 
         backButton.addActionListener(
                 actionEvent -> {
+                    // Go back to the list of patrons.
                     frame.setContentPane(allPatrons.getPanel());
                     frame.validate();
                     frame.repaint();
                 });
         editButton.addActionListener(
                 actionEvent -> {
+                    // Edit the patron and revalidate the model.
                     Patron.setName(nameText.getText());
                     Patron.setPhoneNumber(numberText.getText());
-                    Patron.setDueFees(
-                            Float.parseFloat(feesText.getText())); // TODO: Type validation
+                    Patron.setDueFees(Float.parseFloat(feesText.getText()));
                     allPatrons.getListModel().remove(idx);
                     allPatrons.getListModel().insertElementAt(Patron.toString(), idx);
                     allPatrons.getItemList().setModel(allPatrons.getListModel());
@@ -48,6 +52,11 @@ public class EditPatron {
                 });
     }
 
+    /**
+     * Gets the objects panel property.
+     *
+     * @return The JPanel belonging to the object.
+     */
     public JPanel getPanel() {
         return EditPanel;
     }
@@ -67,46 +76,40 @@ public class EditPatron {
      */
     private void $$$setupUI$$$() {
         EditPanel = new JPanel();
-        EditPanel.setLayout(
-                new com.intellij.uiDesigner.core.GridLayoutManager(
-                        3, 1, new Insets(0, 0, 0, 0), -1, -1));
+        EditPanel.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$("Arial Narrow", -1, 22, label1.getFont());
         if (label1Font != null) label1.setFont(label1Font);
         label1.setText("Edit Form");
         EditPanel.add(
                 label1,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_NONE,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
                         0,
                         false));
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(
-                new com.intellij.uiDesigner.core.GridLayoutManager(
-                        1, 2, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         EditPanel.add(
                 panel1,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         2,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_BOTH,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
                         null,
                         null,
                         null,
@@ -116,16 +119,15 @@ public class EditPatron {
         editButton.setText("Edit");
         panel1.add(
                 editButton,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         1,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -135,16 +137,15 @@ public class EditPatron {
         backButton.setText("Cancel");
         panel1.add(
                 backButton,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -153,40 +154,38 @@ public class EditPatron {
         final JScrollPane scrollPane1 = new JScrollPane();
         EditPanel.add(
                 scrollPane1,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         1,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK
-                                | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_BOTH,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK
+                                | GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK
+                                | GridConstraints.SIZEPOLICY_WANT_GROW,
                         null,
                         null,
                         null,
                         0,
                         false));
         NamePanel = new JPanel();
-        NamePanel.setLayout(
-                new com.intellij.uiDesigner.core.GridLayoutManager(
-                        3, 2, new Insets(0, 0, 0, 0), -1, -1));
+        NamePanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
         scrollPane1.setViewportView(NamePanel);
         final JLabel label2 = new JLabel();
         label2.setText("Name");
         NamePanel.add(
                 label2,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_NONE,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -195,15 +194,15 @@ public class EditPatron {
         nameText = new JTextField();
         NamePanel.add(
                 nameText,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         0,
                         1,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_WEST,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         new Dimension(150, -1),
                         null,
@@ -213,15 +212,15 @@ public class EditPatron {
         label3.setText("Phone Number");
         NamePanel.add(
                 label3,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         1,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_NONE,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -230,15 +229,15 @@ public class EditPatron {
         numberText = new JTextField();
         NamePanel.add(
                 numberText,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         1,
                         1,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_WEST,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         new Dimension(150, -1),
                         null,
@@ -248,15 +247,15 @@ public class EditPatron {
         label4.setText("Due Fees");
         NamePanel.add(
                 label4,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         2,
                         0,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_NONE,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         null,
                         null,
@@ -265,15 +264,15 @@ public class EditPatron {
         feesText = new JTextField();
         NamePanel.add(
                 feesText,
-                new com.intellij.uiDesigner.core.GridConstraints(
+                new GridConstraints(
                         2,
                         1,
                         1,
                         1,
-                        com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST,
-                        com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-                        com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.ANCHOR_WEST,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
                         null,
                         new Dimension(150, -1),
                         null,

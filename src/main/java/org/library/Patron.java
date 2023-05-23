@@ -15,23 +15,15 @@ public class Patron {
     private static long NEXT_ID = GetNextID();
     public static final CSV file = new CSV("/library_files/patrons.csv");
     public static final String CSV_HEADER = "Id,Name,Number,Fees,Out,Password";
-    private static HashMap<Long, Patron> loadedPatrons = LoadPatrons();
+
+    private static final HashMap<Long, Patron> loadedPatrons = LoadPatrons();
 
     private String Name;
     private String PhoneNumber;
     private final long ID;
-    private HashMap<Long, LocalDate> CheckedOut;
+    private final HashMap<Long, LocalDate> CheckedOut;
     private float DueFees;
-    private String Password;
-
-    public enum CSV_INDEX {
-        ID,
-        NAME,
-        PHONE_NUMBER,
-        FEES,
-        CHECKOUTS,
-        PASSWORD
-    }
+    private final String Password;
 
     public Patron(String name, String number, String pword) {
         Name = name;
@@ -53,6 +45,11 @@ public class Patron {
         ID = id;
     }
 
+    /**
+     * Deletes a Patron from the loaded patrons list.
+     *
+     * @param id The id of the patron to delete.
+     */
     public static void DeletePatron(long id) {
         loadedPatrons.remove(id);
     }
@@ -133,11 +130,16 @@ public class Patron {
         }
     }
 
-    /** Stores NEXT_ID. TO BE CALLED ONCE AT PROGRAM CLEANUP. */
+    /**
+     * Stores NEXT_ID. TO BE CALLED ONCE AT PROGRAM CLEANUP.
+     *
+     * @param f The file to write the NextID to.
+     */
     public static void WriteNextID(File f) {
         f.Write(Long.toString(NEXT_ID), true);
     }
 
+    /** Writes the loaded patrons to disk. TO BE CALLED ONCE AT PROGRAM CLEANUP. */
     public static void WriteDatabases() {
         Patron.file.Write(Patron.CSV_HEADER, false);
         for (Map.Entry<Long, Patron> entry : Patron.getLoadedPatrons().entrySet()) {
@@ -166,6 +168,11 @@ public class Patron {
         return str.toString();
     }
 
+    /**
+     * Creates a string from the Patron object containing useful information for the Library.
+     *
+     * @return A string from the Patron object containing useful information for the Library.
+     */
     public String toString() {
         return ID + ", " + Name + ", " + PhoneNumber;
     }
@@ -175,13 +182,13 @@ public class Patron {
      * dates.
      *
      * @param out The CSV to be parsed.
-     * @return A hashmap filled with the parsed date HashMap<long, LocalDate>
+     * @return A hashmap filled with the parsed date HashMap
      */
     public HashMap<Long, LocalDate> ParseCheckedOut(String out) {
         if (out.equals("") || out.equals("{}")) return new HashMap<>(); // The list is empty.
         HashMap<Long, LocalDate> hash = new HashMap<>();
         out = out.substring(1, out.length() - 1); // Remove the {}
-        String[] keys = out.split("\\|"); // Split at each | which are the keys id:date
+        String[] keys = out.split("\\|"); // Split at each | which are the key's id:date
         for (String k : keys) {
             String[] v = k.split(":"); // split this into its components
             long id = Long.parseLong(v[0]); // id
@@ -191,6 +198,12 @@ public class Patron {
         return hash;
     }
 
+    /**
+     * Loads all the books from the disk and stores them in {@link Patron#loadedPatrons}.
+     *
+     * @return A HashMap<Long, Book> containing the loaded books. (To be stored in {@link
+     *     Patron#loadedPatrons}
+     */
     private static HashMap<Long, Patron> LoadPatrons() {
         HashMap<Long, Patron> loaded = new HashMap<>();
         int i = 0;
@@ -240,43 +253,64 @@ public class Patron {
     }
 
     /**
-     * Sets the value of {@link Patron#CheckedOut} at a given key.
+     * Getter for {@link Patron#loadedPatrons}.
      *
-     * @param key The key to modify (or insert).
-     * @param value The value to be stored at that key.
+     * @return {@link Patron#loadedPatrons}.
      */
-    public void setCheckedOut(long key, LocalDate value) {
-        CheckedOut.put(key, value);
-    }
-
     public static HashMap<Long, Patron> getLoadedPatrons() {
         return loadedPatrons;
     }
 
-    public static void setLoadedPatrons(HashMap<Long, Patron> loadedPatrons) {
-        Patron.loadedPatrons = loadedPatrons;
-    }
-
+    /**
+     * Getter for {@link Patron#Password}.
+     *
+     * @return {@link Patron#Password}.
+     */
     public String getPassword() {
         return Password;
     }
 
+    /**
+     * Getter for {@link Patron#PhoneNumber}.
+     *
+     * @return {@link Patron#PhoneNumber}.
+     */
     public String getPhoneNumber() {
         return PhoneNumber;
     }
 
+    /**
+     * Getter for {@link Patron#DueFees}.
+     *
+     * @return {@link Patron#DueFees}.
+     */
     public float getDueFees() {
         return DueFees;
     }
 
+    /**
+     * Setter for {@link Patron#Name}.
+     *
+     * @param name The name to set.
+     */
     public void setName(String name) {
         Name = name;
     }
 
+    /**
+     * Setter for {@link Patron#PhoneNumber}.
+     *
+     * @param phoneNumber The phone number to set.
+     */
     public void setPhoneNumber(String phoneNumber) {
         PhoneNumber = phoneNumber;
     }
 
+    /**
+     * Setter for {@link Patron#DueFees}.
+     *
+     * @param dueFees The due fees to set.
+     */
     public void setDueFees(float dueFees) {
         DueFees = dueFees;
     }
