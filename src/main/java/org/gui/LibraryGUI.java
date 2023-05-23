@@ -1,6 +1,7 @@
 /* (C)2023 */
 package org.gui;
 
+import org.file.Encryptor;
 import org.library.Main;
 import org.library.Patron;
 
@@ -20,6 +21,7 @@ public class LibraryGUI {
                 actionEvent -> {
                     String user = usernameTextField.getText();
                     String pword = String.valueOf(passwordPasswordField.getPassword());
+                    String encrypted_pword = Encryptor.SHA512(pword);
                     if (user.equals("-1")) {
                         if (!pword.equals("librarian"))
                             return;
@@ -36,7 +38,7 @@ public class LibraryGUI {
                         return;
                     }
                     Patron patron = Patron.getLoadedPatrons().get(id);
-                    if (patron.getPassword().equals(pword)) {
+                    if (patron.getPassword().equals(encrypted_pword)) {
                         PatronPage page = new PatronPage(patron, frame, this);
                         frame.setContentPane(page.getPanel());
                         frame.validate();

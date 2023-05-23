@@ -1,5 +1,6 @@
 package org.gui;
 
+import org.file.Encryptor;
 import org.library.Patron;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ public class AddPatron {
         addButton.addActionListener(actionEvent -> {
             String name = nameText.getText();
             String number = numberText.getText();
-            String password = String.valueOf(passwordText.getPassword()); // Remember to encrypt later on.
+            String password = Encryptor.SHA512(String.valueOf(passwordText.getPassword()));
             Patron p = new Patron(name, number, password);
             Patron.getLoadedPatrons().put(p.getID(), p);
             frame.setContentPane(librarianPanel.getPanel());

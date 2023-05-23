@@ -24,7 +24,9 @@ public class Magazine extends Item {
     }
 
     public String toString() {
-        return Title
+        return  ID
+                + ", "
+                + Title
                 + " | Copies: "
                 + Copies
                 + " | Renewed for "

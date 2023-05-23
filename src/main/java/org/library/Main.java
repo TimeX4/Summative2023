@@ -12,7 +12,6 @@ public class Main {
     public static void cleanup() {
         File f = new File("/library_files/next_id");
         f.EmptyContents();
-        // TODO: 2023-05-18 Add search, Hash passwords, polish!
         Item.WriteDatabases();
         Patron.WriteDatabases();
         Item.WriteNextID(f);

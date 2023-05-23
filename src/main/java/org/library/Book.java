@@ -66,7 +66,9 @@ public class Book extends Item {
     }
 
     public String toString() {
-        return Title
+        return  ID
+                + ", "
+                + Title
                 + ", "
                 + Author
                 + " | Copies: "

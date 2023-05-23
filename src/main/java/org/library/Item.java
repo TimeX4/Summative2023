@@ -90,7 +90,6 @@ public abstract class Item {
         }
         str.deleteCharAt(str.length() - 1); // Remove the trailing :
         str.append("}"); // At the closing bracket.
-        System.out.println(str);
         return str.toString();
     }
 
@@ -117,6 +116,10 @@ public abstract class Item {
         for (Map.Entry<Long, Magazine> entry : Magazine.getLoadedMagazines().entrySet()) {
             Magazine.file.Write(entry.getValue().ToCSV(), true);
         }
+    }
+
+    public static long getIDFromToString(String tostring) {
+        return Long.parseLong(tostring.substring( 0, tostring.indexOf(",")));
     }
 
     /**
