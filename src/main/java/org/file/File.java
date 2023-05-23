@@ -17,9 +17,9 @@ public class File {
     }
 
     /**
-     * Opens a file as an InputStream
+     * Opens a file as an InputStream.
      *
-     * @return An InputStream of the file object
+     * @return An InputStream of the file object.
      */
     private InputStream OpenFile() {
         InputStream stream = null;
@@ -73,6 +73,7 @@ public class File {
         }
     }
 
+    /** Empties the contents of the file. */
     public void EmptyContents() {
         try {
             BufferedWriter writer =
@@ -101,14 +102,14 @@ public class File {
         try {
             // iterate over the file until we hit the line we want, store it and break (not return
             // to close handles)
-            while ((line = file.readLine())
-                    != null) {
+            while ((line = file.readLine()) != null) {
                 if (i == idx) {
                     break;
                 }
                 i++;
             }
-            // We are at the end of the file and our idx hasn't been found make sure we don't return the last line.
+            // We are at the end of the file and our idx hasn't been found make sure we don't return
+            // the last line.
             if (i == file.lines().count() && i != idx) line = "";
             inp.close();
             file.close();

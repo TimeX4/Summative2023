@@ -3,7 +3,6 @@ package org.library;
 
 import org.file.*;
 
-import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -119,7 +118,7 @@ public abstract class Item {
     }
 
     public static long getIDFromToString(String tostring) {
-        return Long.parseLong(tostring.substring( 0, tostring.indexOf(",")));
+        return Long.parseLong(tostring.substring(0, tostring.indexOf(",")));
     }
 
     /**

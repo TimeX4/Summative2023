@@ -1,3 +1,4 @@
+/* (C)2023 */
 package org.file;
 
 import java.math.BigInteger;
@@ -5,6 +6,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Encryptor {
+
+    /**
+     * Uses the SHA_512 encryption algorithm to encrypt a string.
+     *
+     * @param input The plaintext string to be encrypted.
+     * @return A SHA_512 encrypted string.
+     */
     public static String SHA512(String input) {
         try {
             // getInstance() method is called with algorithm SHA-512

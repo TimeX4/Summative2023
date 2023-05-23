@@ -3,14 +3,14 @@ package org.library;
 
 import org.file.CSV;
 
-import java.sql.Ref;
 import java.util.HashMap;
 import java.util.List;
 
 public class Magazine extends Item {
     private int RenewalDate;
     public static final CSV file = new CSV("/library_files/magazine.csv");
-    public static final String CSV_HEADER = "Id,Name,Copies,MaxCheckoutDays,Out,RenewalDays,ReferenceOnly";
+    public static final String CSV_HEADER =
+            "Id,Name,Copies,MaxCheckoutDays,Out,RenewalDays,ReferenceOnly";
     private static HashMap<Long, Magazine> loadedMagazines = LoadMagazines();
 
     public Magazine(String name, int copies, int days, int renew) {
@@ -24,7 +24,7 @@ public class Magazine extends Item {
     }
 
     public String toString() {
-        return  ID
+        return ID
                 + ", "
                 + Title
                 + " | Copies: "

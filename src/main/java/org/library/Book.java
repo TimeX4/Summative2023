@@ -9,7 +9,8 @@ import java.util.List;
 public class Book extends Item {
     private String Author;
     public static final CSV file = new CSV("/library_files/books.csv");
-    public static final String CSV_HEADER = "Id,Name,Author,Copies,MaxCheckoutDays,Out,ReferenceOnly";
+    public static final String CSV_HEADER =
+            "Id,Name,Author,Copies,MaxCheckoutDays,Out,ReferenceOnly";
     private static HashMap<Long, Book> loadedBooks = LoadBooks();
 
     public Book(String name, String author, int copies, int days) {
@@ -17,7 +18,8 @@ public class Book extends Item {
         Author = author;
     }
 
-    public Book(long id, String name, String author, int copies, int days, String out, boolean ref) {
+    public Book(
+            long id, String name, String author, int copies, int days, String out, boolean ref) {
         super(id, name, copies, days, out, ref);
         Author = author;
     }
@@ -66,7 +68,7 @@ public class Book extends Item {
     }
 
     public String toString() {
-        return  ID
+        return ID
                 + ", "
                 + Title
                 + ", "

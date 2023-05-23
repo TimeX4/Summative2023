@@ -99,7 +99,8 @@ public class Patron {
     public void CheckOut(Item b) {
         if (b.getReferenceOnly()) return;
         if (b.getCopies() <= 0) return; // TODO: Unable to checkout.
-        if (CheckedOut.containsKey(b.getID())) return; // TODO: Tell them why can't checkedout twice.
+        if (CheckedOut.containsKey(b.getID()))
+            return; // TODO: Tell them why can't checkedout twice.
         b.getCheckOuts().add(this);
         LocalDate date = LocalDate.now();
         CheckedOut.put(b.getID(), date);
