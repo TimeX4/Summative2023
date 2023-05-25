@@ -2,6 +2,7 @@
 package org.library;
 
 import org.file.CSV;
+import org.file.Encryptor;
 import org.file.File;
 
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ public class Patron {
     private final long ID;
     private final HashMap<Long, LocalDate> CheckedOut;
     private float DueFees;
-    private final String Password;
+    private String Password;
 
     public Patron(String name, String number, String pword) {
         Name = name;
@@ -92,16 +93,39 @@ public class Patron {
      * Adds an item to the Patrons CheckedOut list with the checkout date as the current time.
      *
      * @param b The item to add.
+     * @return An integer status code.
+     *     <table>
+     *     <tr>
+     *      <th>Code</th>
+     *      <th>Definition</th>
+     *     </tr>
+     *     <tr>
+     *         <td>0</td>
+     *         <td>Checked out successfully.</td>
+     *     </tr>
+     *     <tr>
+     *         <td>1</td>
+     *         <td>Item is reference only.</td>
+     *     </tr>
+     *     <tr>
+     *         <td>2</td>
+     *         <td>Item is out of stock.</td>
+     *     </tr>
+     *     <tr>
+     *         <td>3</td>
+     *         <td>Item not found.</td>
+     *     </tr>
+     * </table>
      */
-    public void CheckOut(Item b) {
-        if (b.getReferenceOnly()) return;
-        if (b.getCopies() <= 0) return; // TODO: Unable to checkout.
-        if (CheckedOut.containsKey(b.getID()))
-            return; // TODO: Tell them why can't checkedout twice.
+    public int CheckOut(Item b) {
+        if (b.getReferenceOnly()) return 1;
+        if (b.getCopies() <= 0) return 2;
+        if (CheckedOut.containsKey(b.getID())) return 3;
         b.getCheckOuts().add(this);
         LocalDate date = LocalDate.now();
         CheckedOut.put(b.getID(), date);
         b.decrementCopies();
+        return 0;
     }
 
     /**
@@ -313,5 +337,14 @@ public class Patron {
      */
     public void setDueFees(float dueFees) {
         DueFees = dueFees;
+    }
+
+    /**
+     * Setter for {@link Patron#Password}. Encrypts with SHA-512.
+     *
+     * @param password The new password (Plaintext).
+     */
+    public void setPassword(String password) {
+        Password = Encryptor.SHA512(password);
     }
 }

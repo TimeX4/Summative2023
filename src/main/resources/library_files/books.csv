@@ -1,3 +1,2 @@
 Id,Name,Author,Copies,MaxCheckoutDays,Out,ReferenceOnly
-3,stux,stux,123,34,{2},false
-4,flexis,flexis,23,5,{2},false
+0,Thug Hunting,Brandon Currington,30,21,{0:0:0:0:0},false

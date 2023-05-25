@@ -14,6 +14,7 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 
 public class EditPatron {
+
     private JButton editButton;
     private JButton backButton;
     private JPanel NamePanel;
@@ -21,12 +22,14 @@ public class EditPatron {
     private JTextField numberText;
     private JTextField feesText;
     private JPanel EditPanel;
+    private JPasswordField passwordText;
 
     public EditPatron(Patron Patron, JFrame frame, AllPatrons allPatrons, int idx) {
 
         nameText.setText(Patron.getName());
         numberText.setText(Patron.getPhoneNumber());
         feesText.setText(String.valueOf(Patron.getDueFees()));
+        passwordText.setText(Patron.getPassword());
 
         backButton.addActionListener(
                 actionEvent -> {
@@ -41,6 +44,7 @@ public class EditPatron {
                     Patron.setName(nameText.getText());
                     Patron.setPhoneNumber(numberText.getText());
                     Patron.setDueFees(Float.parseFloat(feesText.getText()));
+                    Patron.setPassword(String.valueOf(passwordText.getPassword()));
                     allPatrons.getListModel().remove(idx);
                     allPatrons.getListModel().insertElementAt(Patron.toString(), idx);
                     allPatrons.getItemList().setModel(allPatrons.getListModel());
@@ -171,7 +175,7 @@ public class EditPatron {
                         0,
                         false));
         NamePanel = new JPanel();
-        NamePanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
+        NamePanel.setLayout(new GridLayoutManager(4, 2, new Insets(0, 0, 0, 0), -1, -1));
         scrollPane1.setViewportView(NamePanel);
         final JLabel label2 = new JLabel();
         label2.setText("Name");
@@ -266,6 +270,41 @@ public class EditPatron {
                 feesText,
                 new GridConstraints(
                         2,
+                        1,
+                        1,
+                        1,
+                        GridConstraints.ANCHOR_WEST,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_WANT_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        null,
+                        new Dimension(150, -1),
+                        null,
+                        0,
+                        false));
+        final JLabel label5 = new JLabel();
+        label5.setText("Password");
+        NamePanel.add(
+                label5,
+                new GridConstraints(
+                        3,
+                        0,
+                        1,
+                        1,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        null,
+                        null,
+                        null,
+                        0,
+                        false));
+        passwordText = new JPasswordField();
+        NamePanel.add(
+                passwordText,
+                new GridConstraints(
+                        3,
                         1,
                         1,
                         1,

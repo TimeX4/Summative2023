@@ -81,6 +81,8 @@ public class LibrarianPanel {
     private void $$$setupUI$$$() {
         OptionsPanel = new JPanel();
         OptionsPanel.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
+        OptionsPanel.setMinimumSize(new Dimension(168, 68));
+        OptionsPanel.setPreferredSize(new Dimension(168, 498));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$("Arial Narrow", -1, 22, label1.getFont());
         if (label1Font != null) label1.setFont(label1Font);

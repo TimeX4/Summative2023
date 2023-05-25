@@ -6,8 +6,10 @@ import org.gui.LibraryGUI;
 
 public class Main {
     public static void main(String[] args) {
-        // TODO: 2023-05-23 Add comments to complete javadoc, Remove unused functions and imports,
-        // Anywhere there is type conversion do safety checks
+        // TODO: 2023-05-24 BUG TESTING: Invalid type checking on fields, unexpected input, large
+        // values, small values, wrapper class for number conversion
+        // TODO: 2023-05-24 Reference only in GUI, DVD Length -> Length (Minutes), find out where
+        // notifiers are needed in the gui!
         LibraryGUI.draw();
     }
 
