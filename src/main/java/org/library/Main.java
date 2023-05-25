@@ -8,8 +8,12 @@ public class Main {
     public static void main(String[] args) {
         // TODO: 2023-05-24 BUG TESTING: Invalid type checking on fields, unexpected input, large
         // values, small values, wrapper class for number conversion
-        // TODO: 2023-05-24 Reference only in GUI, DVD Length -> Length (Minutes), find out where
-        // notifiers are needed in the gui!
+        // TODO: 2023-05-24 find out where notifiers are needed in the gui!
+        /* BUGS
+        Type checking across all input fields is unhandled
+        Edit on AllItemsUser when nothing is present or selected throws error
+
+         */
         LibraryGUI.draw();
     }
 

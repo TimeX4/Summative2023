@@ -26,6 +26,8 @@ public class EditItem {
     private JButton confirmButton;
     private JButton cancelButton;
     private JPanel Panel;
+    private JComboBox<String> comboBox1;
+    private JLabel referenceOnlyLabel;
 
     public EditItem(JFrame frame, AllItems allItems, Item item, int idx) {
         // Determine what child class the item is and adjust the fields appropriately.
@@ -42,7 +44,7 @@ public class EditItem {
         nameField.setText(item.getTitle());
         copiesField.setText(String.valueOf(item.getCopies()));
         checkoutField.setText(String.valueOf(item.getMaxCheckoutDays()));
-
+        comboBox1.setSelectedItem(item.getReferenceOnly() ? "true" : "false");
         cancelButton.addActionListener(
                 actionEvent -> {
                     frame.setContentPane(allItems.getPanel());
@@ -54,9 +56,13 @@ public class EditItem {
                     String name = nameField.getText();
                     int copies = Integer.parseInt(copiesField.getText());
                     int checkoutDays = Integer.parseInt(checkoutField.getText());
+                    boolean refOnly = false;
+                    if (comboBox1.getSelectedItem() != null)
+                        if (comboBox1.getSelectedItem().toString().equals("true")) refOnly = true;
                     item.setTitle(name);
                     item.setCopies(copies);
                     item.setMaxCheckoutDays(checkoutDays);
+                    item.setReferenceOnly(refOnly);
                     // Handle the case of the special fields.
                     if (item instanceof Book) {
                         ((Book) item).setAuthor(authorField.getText());
@@ -198,7 +204,7 @@ public class EditItem {
                         0,
                         false));
         final JPanel panel2 = new JPanel();
-        panel2.setLayout(new GridLayoutManager(4, 2, new Insets(0, 0, 0, 0), -1, -1));
+        panel2.setLayout(new GridLayoutManager(5, 2, new Insets(0, 0, 0, 0), -1, -1));
         scrollPane1.setViewportView(panel2);
         nameField = new JTextField();
         panel2.add(
@@ -329,6 +335,45 @@ public class EditItem {
                 label3,
                 new GridConstraints(
                         3,
+                        0,
+                        1,
+                        1,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        null,
+                        null,
+                        null,
+                        0,
+                        false));
+        comboBox1 = new JComboBox();
+        final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
+        defaultComboBoxModel1.addElement("false");
+        defaultComboBoxModel1.addElement("true");
+        comboBox1.setModel(defaultComboBoxModel1);
+        panel2.add(
+                comboBox1,
+                new GridConstraints(
+                        4,
+                        1,
+                        1,
+                        1,
+                        GridConstraints.ANCHOR_WEST,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        null,
+                        null,
+                        null,
+                        0,
+                        false));
+        referenceOnlyLabel = new JLabel();
+        referenceOnlyLabel.setText("Reference Only");
+        panel2.add(
+                referenceOnlyLabel,
+                new GridConstraints(
+                        4,
                         0,
                         1,
                         1,

@@ -20,11 +20,12 @@ public abstract class Item {
     protected int MaxCheckoutDays;
     protected boolean ReferenceOnly;
 
-    Item(String name, int copies, int days) {
+    Item(String name, int copies, int days, boolean referenceOnly) {
         Title = name;
         Copies = copies;
         MaxCheckoutDays = days;
         CheckOuts = ParseCheckouts("");
+        ReferenceOnly = referenceOnly;
 
         ID = NEXT_ID++;
     }
@@ -171,14 +172,31 @@ public abstract class Item {
         Title = title;
     }
 
-    /** Setter for {@link Item#Copies}. */
+    /**
+     * Setter for {@link Item#Copies}.
+     *
+     * @param copies
+     */
     public void setCopies(int copies) {
         Copies = copies;
     }
 
-    /** Setter for {@link Item#MaxCheckoutDays}. */
+    /**
+     * Setter for {@link Item#MaxCheckoutDays}.
+     *
+     * @param maxCheckoutDays int, max days item can be checked out for.
+     */
     public void setMaxCheckoutDays(int maxCheckoutDays) {
         MaxCheckoutDays = maxCheckoutDays;
+    }
+
+    /**
+     * Setter for {@link Item#ReferenceOnly}
+     *
+     * @param referenceOnly boolean, is item reference only?
+     */
+    public void setReferenceOnly(boolean referenceOnly) {
+        ReferenceOnly = referenceOnly;
     }
 
     /** Decrements copies by 1. */

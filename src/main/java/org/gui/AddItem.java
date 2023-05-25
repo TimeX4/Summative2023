@@ -28,6 +28,8 @@ public class AddItem {
     private JButton confirmButton;
     private JButton cancelButton;
     private JPanel Panel;
+    private JComboBox<String> comboBox1;
+    private JLabel referenceOnlyLabel;
 
     public AddItem(JFrame frame, LibrarianPanel librarianPanel) {
         cancelButton.addActionListener(
@@ -44,6 +46,9 @@ public class AddItem {
                     String selected = typeCombo.getSelectedItem().toString();
                     int copies = Integer.parseInt(copiesField.getText());
                     int checkoutDays = Integer.parseInt(maxCheckoutDaysField.getText());
+                    boolean referenceOnly = false;
+                    if (comboBox1.getSelectedItem() != null)
+                        if (comboBox1.getSelectedItem().equals("true")) referenceOnly = true;
                     switch (selected) {
                         case "Book" -> {
                             Book b =
@@ -51,19 +56,30 @@ public class AddItem {
                                             nameField.getText(),
                                             authorRenewalFiled.getText(),
                                             copies,
-                                            checkoutDays);
+                                            checkoutDays,
+                                            referenceOnly);
                             Book.getLoadedBooks().put(b.getID(), b);
                         }
                         case "Magazine" -> {
                             int renewalDays = Integer.parseInt(authorRenewalFiled.getText());
                             Magazine m =
                                     new Magazine(
-                                            nameField.getText(), copies, checkoutDays, renewalDays);
+                                            nameField.getText(),
+                                            copies,
+                                            checkoutDays,
+                                            renewalDays,
+                                            referenceOnly);
                             Magazine.getLoadedMagazines().put(m.getID(), m);
                         }
                         case "DVDs" -> {
                             int length = Integer.parseInt(authorRenewalFiled.getText());
-                            DVD d = new DVD(nameField.getText(), length, copies, checkoutDays);
+                            DVD d =
+                                    new DVD(
+                                            nameField.getText(),
+                                            length,
+                                            copies,
+                                            checkoutDays,
+                                            referenceOnly);
                             DVD.getLoadedDVDs().put(d.getID(), d);
                         }
                     }
@@ -77,10 +93,11 @@ public class AddItem {
                     switch (typeCombo.getSelectedItem().toString()) {
                         case "Book" -> authorRenewalLabel.setText("Author");
                         case "Magazine" -> authorRenewalLabel.setText("Renewal Days");
-                        case "DVDs" -> authorRenewalLabel.setText("Length");
+                        case "DVDs" -> authorRenewalLabel.setText("Length (Minutes)");
                         default -> authorRenewalLabel.setText("ERROR");
                     }
                 });
+        comboBox1.addActionListener(actionEvent -> {});
     }
 
     /**
@@ -202,7 +219,7 @@ public class AddItem {
                         0,
                         false));
         final JPanel panel2 = new JPanel();
-        panel2.setLayout(new GridLayoutManager(4, 2, new Insets(0, 0, 0, 0), -1, -1));
+        panel2.setLayout(new GridLayoutManager(5, 2, new Insets(0, 0, 0, 0), -1, -1));
         scrollPane1.setViewportView(panel2);
         nameLabel = new JLabel();
         nameLabel.setText("Name");
@@ -344,12 +361,51 @@ public class AddItem {
                         null,
                         0,
                         false));
-        typeCombo = new JComboBox();
+        referenceOnlyLabel = new JLabel();
+        referenceOnlyLabel.setText("Reference Only");
+        panel2.add(
+                referenceOnlyLabel,
+                new GridConstraints(
+                        4,
+                        0,
+                        1,
+                        1,
+                        GridConstraints.ANCHOR_CENTER,
+                        GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        null,
+                        null,
+                        null,
+                        0,
+                        false));
+        comboBox1 = new JComboBox();
         final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
-        defaultComboBoxModel1.addElement("Book");
-        defaultComboBoxModel1.addElement("Magazine");
-        defaultComboBoxModel1.addElement("DVDs");
-        typeCombo.setModel(defaultComboBoxModel1);
+        defaultComboBoxModel1.addElement("false");
+        defaultComboBoxModel1.addElement("true");
+        comboBox1.setModel(defaultComboBoxModel1);
+        panel2.add(
+                comboBox1,
+                new GridConstraints(
+                        4,
+                        1,
+                        1,
+                        1,
+                        GridConstraints.ANCHOR_WEST,
+                        GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_FIXED,
+                        null,
+                        null,
+                        null,
+                        0,
+                        false));
+        typeCombo = new JComboBox();
+        final DefaultComboBoxModel defaultComboBoxModel2 = new DefaultComboBoxModel();
+        defaultComboBoxModel2.addElement("Book");
+        defaultComboBoxModel2.addElement("Magazine");
+        defaultComboBoxModel2.addElement("DVDs");
+        typeCombo.setModel(defaultComboBoxModel2);
         Panel.add(
                 typeCombo,
                 new GridConstraints(

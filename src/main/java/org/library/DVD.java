@@ -13,8 +13,8 @@ public class DVD extends Item {
             "Id,Name,Length,Copies,MaxCheckoutDays,Out,ReferenceOnly";
     private static final HashMap<Long, DVD> loadedDVDs = LoadDVDs();
 
-    public DVD(String name, int length, int copies, int days) {
-        super(name, copies, days);
+    public DVD(String name, int length, int copies, int days, boolean reference) {
+        super(name, copies, days, reference);
         Length = length;
     }
 

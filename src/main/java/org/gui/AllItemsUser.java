@@ -140,7 +140,7 @@ public class AllItemsUser {
         switch (Patron.CheckOut(item)) {
             case 1 -> notificationText.showText("Item is reference only.", 2000);
             case 2 -> notificationText.showText("Item is out of stock.", 2000);
-            case 3 -> notificationText.showText("Item not found.", 2000);
+            case 3 -> notificationText.showText("Item already checked out.", 2000);
             default -> notificationText.showText("Checked out " + item.getTitle(), 2000);
         }
         // Revalidate the model on the PatronPage

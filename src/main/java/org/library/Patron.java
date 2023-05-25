@@ -113,7 +113,7 @@ public class Patron {
      *     </tr>
      *     <tr>
      *         <td>3</td>
-     *         <td>Item not found.</td>
+     *         <td>Item already checked out.</td>
      *     </tr>
      * </table>
      */

@@ -13,8 +13,8 @@ public class Magazine extends Item {
             "Id,Name,Copies,MaxCheckoutDays,Out,RenewalDays,ReferenceOnly";
     private static final HashMap<Long, Magazine> loadedMagazines = LoadMagazines();
 
-    public Magazine(String name, int copies, int days, int renew) {
-        super(name, copies, days);
+    public Magazine(String name, int copies, int days, int renew, boolean ref) {
+        super(name, copies, days, ref);
         RenewalDate = renew;
     }
 

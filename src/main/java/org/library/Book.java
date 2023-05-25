@@ -13,8 +13,8 @@ public class Book extends Item {
             "Id,Name,Author,Copies,MaxCheckoutDays,Out,ReferenceOnly";
     private static final HashMap<Long, Book> loadedBooks = LoadBooks();
 
-    public Book(String name, String author, int copies, int days) {
-        super(name, copies, days);
+    public Book(String name, String author, int copies, int days, boolean ref) {
+        super(name, copies, days, ref);
         Author = author;
     }
 

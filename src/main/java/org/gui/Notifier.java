@@ -5,8 +5,7 @@ import javax.swing.*;
 
 public class Notifier extends JLabel {
     Notifier() {
-        setVisible(false);
-        setText("ERROR");
+        setText(" ");
     }
 
     /**
@@ -18,7 +17,6 @@ public class Notifier extends JLabel {
      */
     public void showText(String text, int millis) {
         setText(text);
-        setVisible(true);
         timedHide(millis);
     }
 
@@ -33,8 +31,7 @@ public class Notifier extends JLabel {
                         new java.util.TimerTask() {
                             @Override
                             public void run() {
-                                setVisible(false);
-                                setText("ERROR");
+                                setText(" ");
                             }
                         },
                         millis);
