@@ -10,18 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d7e4f20f-0e59-47bd-8691-c5d20d1f4744" name="Changes" comment="Added automatic writing files to disk at cleanup functionality&#10;Fixed bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/AddItem.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/AddItem.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/AddItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/AddItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/AllItemsUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/AllItemsUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/EditItem.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/EditItem.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/EditItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/EditItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/gui/Notifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gui/Notifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/DVD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/DVD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Magazine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Magazine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/Patron.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/Patron.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/books.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/books.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/next_id" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/next_id" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/library_files/patrons.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library_files/patrons.csv" afterDir="false" />
@@ -48,17 +37,6 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Summative2023" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Summative2023" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Summative2023" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="documentation" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -116,13 +94,16 @@
     &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;618&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/thebe/IdeaProjects/Summative2023&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propGUI&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -250,6 +231,8 @@
       <workItem from="1684971500192" duration="5236000" />
       <workItem from="1684983797193" duration="2143000" />
       <workItem from="1684985958217" duration="913000" />
+      <workItem from="1685371170674" duration="437000" />
+      <workItem from="1685371636184" duration="2061000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1682699097882</created>
