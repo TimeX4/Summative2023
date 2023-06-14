@@ -5,6 +5,7 @@ import org.file.*;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class Item {
     private static long NEXT_ID = GetNextID();
@@ -47,7 +48,7 @@ public abstract class Item {
      * @return An array of Patrons who have checked out the given item.
      */
     private ArrayList<Patron> ParseCheckouts(String out) {
-        if (out.equals("") || out.equals("{}"))
+        if (out.isBlank() || out.equals("{}"))
             return new ArrayList<>(); // Checkouts list is empty.
         out = out.substring(1, out.length() - 1); // Remove the encapsulating {}.
         String[] s = out.split(":"); // Split the list into its values.
@@ -116,10 +117,12 @@ public abstract class Item {
      * Returns the items ID as parsed from the FIRST value of a CSV string.
      *
      * @param tostring A CSV string in the form ID,...
-     * @return The ID parsed as a long.
+     * @return The ID parsed as a long. Or -1 if an invalid string.
      */
     public static long getIDFromToString(String tostring) {
-        return Long.parseLong(tostring.substring(0, tostring.indexOf(",")));
+        AtomicLong id = new AtomicLong();
+        if (!Parser.GetLong(tostring.substring(0, tostring.indexOf(",")), id, false)) return -1;
+        return id.get();
     }
 
     /**
@@ -175,7 +178,7 @@ public abstract class Item {
     /**
      * Setter for {@link Item#Copies}.
      *
-     * @param copies
+     * @param copies The new amount of copies to set.
      */
     public void setCopies(int copies) {
         Copies = copies;

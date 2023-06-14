@@ -26,14 +26,16 @@ public class Notifier extends JLabel {
      * @param millis The time in milliseconds.
      */
     private void timedHide(int millis) {
-        new java.util.Timer()
+        new java.util.Timer(true)
                 .schedule(
                         new java.util.TimerTask() {
                             @Override
                             public void run() {
-                                setText(" ");
+                                setText("");
+                                cancel();
                             }
                         },
                         millis);
     }
+
 }

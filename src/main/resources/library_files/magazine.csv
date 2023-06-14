@@ -1,2 +1,2 @@
 Id,Name,Copies,MaxCheckoutDays,Out,RenewalDays,ReferenceOnly
-1,The magazine with no stock,0,14,{},7,false
+1,The magazine with no stock,5,14,{},7,false

@@ -4,6 +4,10 @@ plugins {
 	id 'application'
 }
 
+/*compileJava {
+	options.compilerArgs << '-Xlint:unchecked'
+}*/
+
 application {
 	mainClass = 'org.library.Main'
 }

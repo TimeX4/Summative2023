@@ -1,5 +1,2 @@
 Id,Name,Author,Copies,MaxCheckoutDays,Out,ReferenceOnly
-0,Thug Hunting,Brandon Currington,29,21,{},false
-3,Behdad's Book (RARE ARCHIVE),Behdad Soleymaniha,1,21,{},true
-4,a,a,2,2,{},true
-5,a,a,1,2,{6},false
+7,The book,Peyton,12,2,{},true

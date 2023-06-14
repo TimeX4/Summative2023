@@ -47,7 +47,7 @@ public class DVD extends Item {
      * @return A new DVD object populated by the CSV string.
      */
     private static DVD FromCSV(String item) {
-        if (item.equals("")) return null;
+        if (item.isBlank()) return null;
         List<String> tokens = CSV.ParseCSV(item);
         long id = Long.parseLong(tokens.get(0));
         String name = tokens.get(1);

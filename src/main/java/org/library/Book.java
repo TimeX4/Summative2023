@@ -5,6 +5,7 @@ import org.file.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Book extends Item {
     private String Author;
@@ -48,17 +49,35 @@ public class Book extends Item {
      * @return A new Book object populated by the CSV string.
      */
     private static Book FromCSV(String item) {
-        if (item.equals("")) return null;
+        if (item.isBlank()) return null;
         List<String> tokens = CSV.ParseCSV(item);
-        long id = Long.parseLong(tokens.get(0));
+        AtomicLong id = new AtomicLong();
+        if (!Parser.GetLong(tokens.get(0), id, false)) id.set(1);
         String name = tokens.get(1);
         String author = tokens.get(2);
         int copies = Integer.parseInt(tokens.get(3));
         int time = Integer.parseInt(tokens.get(4));
         String out = tokens.get(5);
         boolean ref = Boolean.parseBoolean(tokens.get(6));
-        return new Book(id, name, author, copies, time, out, ref);
+        return new Book(id.get(), name, author, copies, time, out, ref);
     }
+
+    /**
+     * Determines if the book is a duplicate by checking if the name and author match as well as the reference only state.
+     * For example (Bob, Joe, true) -> (Bob, Joe, false) are not the same book.
+     * @param name The name of the book.
+     * @param author The author of the book.
+     * @param ref The reference only state.
+     * @return True if it is a duplicate, false if it is not.
+     */
+    public static boolean isDuplicate(String name, String author, boolean ref) {
+        for (var entry : loadedBooks.entrySet()) {
+            Book b = entry.getValue();
+            if (name.equals(b.Title) && author.equals(b.Author) && ref == b.ReferenceOnly) return true;
+        }
+        return false;
+    }
+
 
     /**
      * Loads all the books from the disk and stores them in {@link Book#loadedBooks}.

@@ -78,7 +78,7 @@ public class Patron {
      * @return A new Patron object.
      */
     public static Patron FromCSV(String csv) {
-        if (csv.equals("")) return null;
+        if (csv.isBlank()) return null;
         List<String> tokens = CSV.ParseCSV(csv);
         long id = Long.parseLong(tokens.get(0));
         String name = tokens.get(1);
@@ -87,6 +87,19 @@ public class Patron {
         String out = tokens.get(4);
         String pword = tokens.get(5);
         return new Patron(id, name, number, fees, out, pword);
+    }
+
+    /**
+     * Determines if there is a duplicate patron loaded into memory by comparing phone numbers.
+     * @param phoneNumber The phone number to check.
+     * @return true if the patron is a duplicate and false otherwise.
+     */
+    public static boolean isDuplicate(String phoneNumber) {
+        for (var entry : loadedPatrons.entrySet()) {
+            Patron p = entry.getValue();
+            if (p.getPhoneNumber().equals(phoneNumber)) return true;
+        }
+        return false;
     }
 
     /**
@@ -209,7 +222,7 @@ public class Patron {
      * @return A hashmap filled with the parsed date HashMap
      */
     public HashMap<Long, LocalDate> ParseCheckedOut(String out) {
-        if (out.equals("") || out.equals("{}")) return new HashMap<>(); // The list is empty.
+        if (out.isBlank() || out.equals("{}")) return new HashMap<>(); // The list is empty.
         HashMap<Long, LocalDate> hash = new HashMap<>();
         out = out.substring(1, out.length() - 1); // Remove the {}
         String[] keys = out.split("\\|"); // Split at each | which are the key's id:date
@@ -255,7 +268,7 @@ public class Patron {
      */
     public static long GetNextID() {
         File f = new File("/library_files/next_id");
-        return Long.parseLong(f.GetLine(0));
+        return Long.parseLong(f.GetLine(1));
     }
 
     /**
